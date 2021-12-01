@@ -2419,6 +2419,18 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
+ahooks@^3.0.0-alpha.15:
+  version "3.0.0-alpha.15"
+  resolved "https://registry.npmmirror.com/ahooks/download/ahooks-3.0.0-alpha.15.tgz#b1b9bd2ec83dc68ea9891d4090d0abbe4d3c4dac"
+  integrity sha512-Kqd35P4uaC9OjJ/nF9UfzN4RM0pDF7wcsmEsq5o0X7ASbSHc2c1FcmbODa4+VcJv3njBpKE0KwBsJjTJeLaiWQ==
+  dependencies:
+    dayjs "^1.9.1"
+    intersection-observer "^0.7.0"
+    js-cookie "^3.0.0"
+    lodash "^4.17.21"
+    resize-observer-polyfill "^1.5.1"
+    screenfull "^5.0.0"
+
 ajv-errors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.nlark.com/ajv-errors/download/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"
@@ -4253,7 +4265,7 @@ date-fns@2.x, date-fns@^2.16.1:
   resolved "https://registry.npmmirror.com/date-fns/download/date-fns-2.27.0.tgz#e1ff3c3ddbbab8a2eaadbb6106be2929a5a2d92b"
   integrity sha512-sj+J0Mo2p2X1e306MHq282WS4/A8Pz/95GIFcsPNMPMZVI3EUrAdSv90al1k+p74WGLCruMXk23bfEDZa71X9Q==
 
-dayjs@1.x:
+dayjs@1.x, dayjs@^1.9.1:
   version "1.10.7"
   resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
   integrity sha1-LPX5Gt0oEWdIRAhmoKHSbzps5Gg=
@@ -6255,6 +6267,11 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
+intersection-observer@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/intersection-observer/download/intersection-observer-0.7.0.tgz#ee16bee978db53516ead2f0a8154b09b400bbdc9"
+  integrity sha1-7ha+6XjbU1FurS8KgVSwm0ALvck=
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.nlark.com/ip-regex/download/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
@@ -7176,6 +7193,11 @@ joi@^17.4.0:
     "@sideway/address" "^4.1.0"
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
+
+js-cookie@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.nlark.com/js-cookie/download/js-cookie-3.0.1.tgz?cache=0&sync_timestamp=1630493056723&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fjs-cookie%2Fdownload%2Fjs-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha1-njm0xsL1ZWNwjX0x9vXyGHOpJBQ=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -10692,6 +10714,11 @@ schema-utils@^3.0.0, schema-utils@^3.1.1:
     "@types/json-schema" "^7.0.8"
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
+
+screenfull@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.npmmirror.com/screenfull/download/screenfull-5.2.0.tgz?cache=0&sync_timestamp=1635923508328&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fscreenfull%2Fdownload%2Fscreenfull-5.2.0.tgz#6533d524d30621fc1283b9692146f3f13a93d1ba"
+  integrity sha1-ZTPVJNMGIfwSg7lpIUbz8TqT0bo=
 
 scroll-into-view-if-needed@^2.2.25:
   version "2.2.28"
