@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button } from 'antd';
+
+import Index from './components'
 
 const App = () => (
-  <div>
-    <Button type="primary">Button</Button>
-  </div>
+  <Index />
 );
 
 export default App;
