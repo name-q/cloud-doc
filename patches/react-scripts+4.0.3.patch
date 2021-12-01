@@ -1,0 +1,29 @@
+diff --git a/node_modules/react-scripts/scripts/start.js b/node_modules/react-scripts/scripts/start.js
+index ffbb15d..cc7bfee 100644
+--- a/node_modules/react-scripts/scripts/start.js
++++ b/node_modules/react-scripts/scripts/start.js
+@@ -43,7 +43,6 @@ const {
+   prepareProxy,
+   prepareUrls,
+ } = require('react-dev-utils/WebpackDevServerUtils');
+-const openBrowser = require('react-dev-utils/openBrowser');
+ const semver = require('semver');
+ const paths = require('../config/paths');
+ const configFactory = require('../config/webpack.config');
+@@ -61,7 +60,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+ }
+ 
+ // Tools like Cloud9 rely on this.
+-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
++const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 1234;
+ const HOST = process.env.HOST || '0.0.0.0';
+ 
+ if (process.env.HOST) {
+@@ -156,7 +155,6 @@ checkBrowsers(paths.appPath, isInteractive)
+       }
+ 
+       console.log(chalk.cyan('Starting the development server...\n'));
+-      openBrowser(urls.localUrlForBrowser);
+     });
+ 
+     ['SIGINT', 'SIGTERM'].forEach(function (sig) {
