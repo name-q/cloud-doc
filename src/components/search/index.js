@@ -1,32 +1,26 @@
 import React, { useState, memo, useMemo } from 'react';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { useEventListener } from 'ahooks';
-const Search = () => {
+const Search = props => {
 
     const [searchKey, setSearchKey] = useState(null);
+    const [onFocus, setOnFocus] = useState(false);
     const _change = e => setSearchKey(e.target.value)
 
-    // 监听键盘
-    const [keydown, setKeydown] = useState(null);
-    useEventListener('keydown', (ev) => {
-        setKeydown(ev.code);
-    });
-    console.log('监听键盘>>>', keydown)
+    let { keydown } = props
 
-    const inputRef = React.useRef(null);
-
-    // 响应键盘事件
     useMemo(() => {
-        if (keydown) {
-            // esc清空
-            if (['Escape'].includes(keydown)) {
-                setSearchKey(null)
+        // 聚焦时响应键盘事件
+        if (onFocus) {
+            console.log('监听键盘>>>', keydown)
+            if (keydown) {
+                // esc清空
+                if (['Escape'].includes(keydown)) {
+                    setSearchKey(null)
+                }
             }
         }
     }, [keydown])
-
-
 
     return (
         <Input
@@ -35,9 +29,10 @@ const Search = () => {
             suffix={
                 <SearchOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
             }
-            ref={inputRef}
             value={searchKey}
             onChange={_change}
+            onFocus={() => setOnFocus(true)}
+            onBlur={() => setOnFocus(false)}
         />
     )
 }
