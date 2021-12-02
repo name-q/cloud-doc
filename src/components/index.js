@@ -11,12 +11,16 @@ const Index = () => {
         setKeydown(ev.code);
     });
 
+    const searchCloud = searchKey => {
+        console.log(searchKey, '<<<searchKey')
+    }
+
     return (
         <Row style={{ height: '100vh' }}>
-            <Col flex={2}>
-                <Search keydown={keydown} />
+            <Col style={{ width: 200, background:'#eee' }}>
+                <Search keydown={keydown} searchCloud={searchCloud} />
             </Col>
-            <Col flex={22}>
+            <Col flex={1}>
                 r 3
             </Col>
         </Row>
