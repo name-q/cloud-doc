@@ -2,25 +2,27 @@
 
 'use strict';
 
-/**
- * @param {Egg.EggAppInfo} appInfo app info
- */
 module.exports = appInfo => {
-  /**
-   * built-in config
-   * @type {Egg.EggAppConfig}
-   **/
-  const config = exports = {};
 
-  // use for cookie sign key, should change to your own and keep security
+  const config = exports = {
+    mongoose: {
+      client: {
+        url: 'mongodb://admin:admin@localhost:27017/cloud-docx',
+        options: {
+          useCreateIndex: true,
+          useFindAndModify: false,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        },
+      },
+    }
+  };
+
   config.keys = appInfo.name + '_1620206666@qq.com';
 
-  // add your middleware config here
   config.middleware = [];
 
-  // add your user config here
   const userConfig = {
-    // myAppName: 'egg',
   };
 
   return {
