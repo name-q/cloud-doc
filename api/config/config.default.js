@@ -15,7 +15,15 @@ module.exports = appInfo => {
           useUnifiedTopology: true,
         },
       },
-    }
+    },
+
+    session: {
+      key: 'SESS_ID',
+      maxAge: 300000,
+      httpOnly: true,
+      encrypt: true,
+    },
+
   };
 
   config.keys = appInfo.name + '_1620206666@qq.com';
