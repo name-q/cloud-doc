@@ -36,7 +36,7 @@ const Search = props => {
             placeholder="搜索云文档"
             suffix={
                 <SearchOutlined
-                    style={{ color: 'rgba(0,0,0,.45)' }}
+                    style={{ color: 'rgba(0,0,0,.45)',fontSize:16 }}
                     onClick={useCallback(() => searchKey ? searchCloud(searchKey) : null, [searchKey])}
                 />
             }
