@@ -1,8 +1,6 @@
 module.exports = app => {
     const mongoose = app.mongoose;
     const Schema = mongoose.Schema;
-
-    //(挂载名，实例化，集合名)
     return mongoose.model(
         'Userinfo',
         new Schema({
