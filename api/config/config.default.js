@@ -24,6 +24,12 @@ module.exports = appInfo => {
       encrypt: true,
     },
 
+    security: {
+      csrf: {
+        ignore: ctx => ctx.request.url.indexOf('/api') != -1 ? true : false
+      },
+    }
+    
   };
 
   config.keys = appInfo.name + '_1620206666@qq.com';
