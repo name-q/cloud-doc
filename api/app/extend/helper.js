@@ -12,9 +12,9 @@ module.exports = {
     },
 
     // 获取MD5值
-    getMd5(data) {
+    getMd5(data, salt = '') {
         if (!data) return '';
-        data = data.toString()
+        data = data.toString() + salt
         return crypto.MD5(data).toString()
     },
 
