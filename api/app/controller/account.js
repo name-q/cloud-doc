@@ -14,7 +14,18 @@ class AccountController extends Controller {
 
   // 注册账号
   async registerAnAccount() {
+    let { ctx } = this
+    // 用户邮箱 密码 昵称
+    let { mail, password, nick } = ctx.request.body
+    let result
+    try {
 
+      result = await ctx.service.account.registerAnAccount(mail, password, nick)
+
+    } catch (error) {
+      ctx.errbody(error)
+    }
+    // ctx.successbody(result)
   }
 
   // 登入账号
