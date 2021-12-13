@@ -1,6 +1,5 @@
 'use strict';
 
-// 加密库 node内置
 const crypto = require('crypto-js');
 
 module.exports = {
