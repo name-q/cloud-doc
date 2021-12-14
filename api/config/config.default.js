@@ -17,6 +17,15 @@ module.exports = appInfo => {
       },
     },
 
+    redis: {
+      client: {
+        port: 6379,
+        host: '127.0.0.1',
+        password: '',
+        db: 0
+      },
+    },
+
     session: {
       key: 'SESS_ID',
       maxAge: 300000,
