@@ -25,7 +25,6 @@ class AccountController extends Controller {
     } catch (error) {
       ctx.errbody(error)
     }
-    // ctx.successbody(result)
   }
 
   // 登入账号
