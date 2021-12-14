@@ -28,8 +28,10 @@ module.exports = appInfo => {
       csrf: {
         ignore: ctx => ctx.request.url.indexOf('/api') != -1 ? true : false
       },
-    }
-    
+    },
+
+    proxy: true,
+    maxProxyCount: 1,
   };
 
   config.keys = appInfo.name + '_1620206666@qq.com';
