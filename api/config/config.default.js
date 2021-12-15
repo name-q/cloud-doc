@@ -2,6 +2,9 @@
 
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
 module.exports = appInfo => {
 
   const config = exports = {
@@ -48,6 +51,12 @@ module.exports = appInfo => {
   config.middleware = [];
 
   const userConfig = {
+
+    // RSA加密私钥
+    PRIVATE_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_private_key.pem'), 'ascii'),
+    // RSA解密公钥
+    PUBLIC_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_public_key.pem'), 'ascii'),
+
   };
 
   return {
