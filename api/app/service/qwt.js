@@ -56,7 +56,7 @@ class QWTService extends Service {
      * 解析QWT
      *-> 应用场景
      *-> QWT
-     *=> ctx上挂载token存的内容 | false (QWT过期或伪造)
+     *=> ctx上挂载token存的内容 true | false (QWT过期或伪造)
     */
     async parseQWT(yscene, QWT) {
         let { ctx } = this
@@ -90,6 +90,7 @@ class QWTService extends Service {
 
             // data挂载ctx
             ctx.data = data
+            return true
         } catch {
             return false
         }
