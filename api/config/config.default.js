@@ -48,8 +48,6 @@ module.exports = appInfo => {
 
   config.keys = appInfo.name + '_1620206666@qq.com';
 
-  config.middleware = [];
-
   const userConfig = {
 
     // RSA加密私钥

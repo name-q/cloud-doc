@@ -22,9 +22,6 @@ by qy 2021 12 15
 
 'use strict';
 
-const crypto = require('crypto-js');
-const NodeRSA = require('node-rsa');
-
 const Service = require('egg').Service;
 
 class QWTService extends Service {
