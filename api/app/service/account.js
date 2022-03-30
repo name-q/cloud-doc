@@ -6,7 +6,6 @@ class accountService extends Service {
     // 注册账号
     async registerAnAccount(mail, password, nick) {
         let { ctx } = this
-        // 参数校验
         if (mail && password && nick) {
             let { isMail, isPassword, isNick } = ctx.helper
             if (!isMail(mail) || !isPassword(password) || !isNick(nick)) throw '参数错误'
@@ -18,6 +17,7 @@ class accountService extends Service {
             try {
                 // 载入数据库
                 result = await ctx.service.mongo.save('Userinfo', { mail, password, nick })
+                return result?._id ? 'success' : 'error'
             } catch {
                 ctx.logger.error('user register params error', { mail, password, nick })
                 throw '操作失败'
