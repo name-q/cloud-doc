@@ -1,9 +1,7 @@
-module.exports = yscene => {
+module.exports = (options, app) => {
     return async function whoami(ctx, next) {
         try {
-            if (!ctx.service.qwt.parseQWT(yscene, ctx.header.qwt)) {
-                throw 'QWT无效'
-            }
+            await ctx.service.qwt.parseQWT(options.api, ctx.header.qwt)
             await next()
         } catch {
             ctx.status = 404

@@ -49,7 +49,8 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1620206666@qq.com';
 
   const userConfig = {
-
+    // QWT过期时间 60天
+    qwtEndTime: 5184000000, 
     // RSA加密私钥
     PRIVATE_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_private_key.pem'), 'ascii'),
     // RSA解密公钥

@@ -28,17 +28,22 @@ module.exports = app => {
                 trim: true,
                 maxlength: 10,
             },
+            // 注册时间
+            registerTime: {
+                type: Number,
+                default: new Date().getTime(),
+            },
             // 最后登入时间
             lastTime: {
                 type: Number,
                 default: 0,
                 validate: (d) => { return d >= 0 }
             },
-            // 注册时间
-            registerTime: {
-                type: Number,
-                default: new Date().getTime(),
-            }
+            // 登入IP
+            ip: {
+                type: String,
+                trim: true,
+            },
         })
         , 'user_info'
     );

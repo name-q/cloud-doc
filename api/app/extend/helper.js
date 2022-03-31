@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('crypto-js');
+const NodeRSA = require('node-rsa')
 
 module.exports = {
 

@@ -46,8 +46,9 @@ class QWTService extends Service {
             let encTAIL = this.TAIL(encHEAD, encBODY)
 
             return encBODY + encHEAD + encTAIL + '=>qy'
-        } catch {
-            return false
+        } catch (err) {
+            console.log(err)
+            throw '操作失败'
         }
     }
 
@@ -60,40 +61,35 @@ class QWTService extends Service {
     */
     async parseQWT(yscene, QWT) {
         let { ctx } = this
-        try {
-            // QWT由32位头+随机位身+32位尾组成
-            QWT = QWT.toString()
-            if (!QWT || QWT.length < 64) throw '长度校验失败'
-            let qwtLength = QWT.length
-            // 解析获取到的 H B T
-            let getHEAD = QWT.substring(qwtLength - 68, qwtLength - 36)
-            let getBODY = QWT.substring(0, qwtLength - 68)
-            let getTAIL = QWT.substring(qwtLength - 36, qwtLength - 4)
-            // 尾部合理性判断
-            if (QWT.substring(qwtLength - 4) !== '=>qy') throw '格式校验失败'
-            let encTAIL = this.TAIL(getHEAD, getBODY)
-            if (encTAIL !== getTAIL) throw '尾部校验失败'
-            // 头部校验
-            let encHEAD = ctx.helper.getMd5(this.HEAD(yscene))
-            if (encHEAD !== getHEAD) throw '头部校验失败'
-            // 解析身
-            let { data, endTime, ...redisID } = JSON.parse(ctx.helper.RSAget(getBODY))
-            // 超时验证
-            if (endTime <= new Date().getTime()) throw '超时失效'
-            // 唯一性验证
-            let { _id } = data
-            _id = 'qy' + _id
-            let pass = await this.app.redis.get(_id)
-            if (!pass) throw '唯一性验证失败'
-            let getPass = redisID[_id]
-            if (getPass !== pass) throw '唯一性验证失败'
+        // QWT由32位头+随机位身+32位尾组成
+        QWT = QWT.toString()
+        if (!QWT || QWT.length < 64) throw '长度校验失败'
+        let qwtLength = QWT.length
+        // 解析获取到的 H B T
+        let getHEAD = QWT.substring(qwtLength - 68, qwtLength - 36)
+        let getBODY = QWT.substring(0, qwtLength - 68)
+        let getTAIL = QWT.substring(qwtLength - 36, qwtLength - 4)
+        // 尾部合理性判断
+        if (QWT.substring(qwtLength - 4) !== '=>qy') throw '格式校验失败'
+        let encTAIL = this.TAIL(getHEAD, getBODY)
+        if (encTAIL !== getTAIL) throw '尾部校验失败'
+        // 头部校验
+        let encHEAD = ctx.helper.getMd5(this.HEAD(yscene))
+        if (encHEAD !== getHEAD) throw '头部校验失败'
+        // 解析身
+        let { data, endTime, ...redisID } = JSON.parse(ctx.helper.RSAget(getBODY))
+        // 超时验证
+        if (endTime <= new Date().getTime()) throw '超时失效'
+        // 唯一性验证
+        let { _id } = data
+        _id = 'qy' + _id
+        let pass = await this.app.redis.get(_id)
+        if (!pass) throw '唯一性验证失败'
+        let getPass = redisID[_id]
+        if (getPass !== pass) throw '唯一性验证失败'
 
-            // data挂载ctx
-            ctx.data = data
-            return true
-        } catch {
-            return false
-        }
+        // data挂载ctx
+        ctx.data = data
     }
 
 

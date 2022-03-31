@@ -27,6 +27,46 @@ class accountService extends Service {
             throw '参数缺失'
         }
     }
+
+    // 登入账号
+    async loginAccount(mail, password) {
+        let { ctx, app } = this
+        if (mail && password) {
+            let { isMail, isPassword } = ctx.helper
+            if (!isMail(mail) || !isPassword(password)) throw '参数错误'
+
+            // 账号密码是否正确
+            let result = await ctx.service.mongo.findOne('Userinfo', { mail, password })
+            if (result?._id) {
+                // 密码错误次数超过3次不允许登入
+                let id = 'account.errCode' + result._id
+                let countString = await app.redis.get(id)
+                if(countString && parseInt(countString) >= 3) throw '请20分钟后登入'
+
+                // 更新登入IP 并清除错误次数
+                ctx.service.mongo.updateOne('Userinfo', { mail, password }, { ip: ctx.request.ip })
+                await app.redis.del(id)
+
+                return result
+            }
+
+            // 是否注册过
+            result = await ctx.service.mongo.findOne('Userinfo', { mail })
+            if (result?._id) {
+                // 密码输入错误次数更新<redis>
+                let id = 'account.errCode' + result._id
+                let countString = await app.redis.get(id)
+                countString = countString ? parseInt(countString) + 1 : 1
+                await app.redis.set(id, countString)
+                await app.redis.expire(id, 1200)
+                if(parseInt(countString) >= 3) throw '请20分钟后登入'
+                throw '密码不正确'
+            }
+            throw '该邮箱尚未注册'
+        } else {
+            throw '参数缺失'
+        }
+    }
 }
 
 module.exports = accountService

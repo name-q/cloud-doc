@@ -19,9 +19,9 @@ class AccountController extends Controller {
     let { mail, password, nick, verificationCode } = ctx.request.body
     try {
       // 验证码校验
-      await this.ctx.service.verify.parse('account.getVerificationCode',verificationCode)
+      await this.ctx.service.verify.parse('account.getVerificationCode', verificationCode)
 
-      let result = await ctx.service.account.registerAnAccount(mail, password, nick, verificationCode)
+      let result = await ctx.service.account.registerAnAccount(mail, password, nick)
       if (result === 'success') return ctx.successbody('操作成功')
       ctx.errbody('操作失败')
     } catch (error) {
@@ -31,11 +31,23 @@ class AccountController extends Controller {
 
   // 登入账号
   async loginAccount() {
+    let { ctx } = this
+    // 用户邮箱 密码 验证码
+    let { mail, password, verificationCode } = ctx.request.body
+    try {
+      // 验证码校验
+      await this.ctx.service.verify.parse('account.getVerificationCode', verificationCode)
 
-  }
-
-  // 退出账号-记录退出时间IP
-  async quitAccount() {
+      let result = await ctx.service.account.loginAccount(mail, password)
+      if (result?._id) {
+        let qwt = await ctx.service.qwt.createQWT('user-login-ok', { mail }, result._id)
+        ctx.successbody(qwt)
+        return
+      }
+      ctx.errbody('操作失败')
+    } catch (error) {
+      ctx.errbody(error)
+    }
   }
 
   // 修改密码
