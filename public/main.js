@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron')
-
+// 去除安全警告 react-router-dom 会被安全meta限制
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 const path = require('path');
 const isDev = require('electron-is-dev');
 
