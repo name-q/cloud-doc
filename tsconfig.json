@@ -22,5 +22,23 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "baseUrl": "./src",
+  "paths": {
+    "@/kit/*": [
+      "kit/*"
+    ],
+    "@/pages/*": [
+      "pages/*"
+    ],
+    "@/routers/*": [
+      "routers/*"
+    ],
+    "@/assets/*": [
+      "assets/*"
+    ],
+    "@/redux/*": [
+      "redux/*"
+    ],
+  },
 }

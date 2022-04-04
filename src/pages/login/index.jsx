@@ -1,6 +1,7 @@
 
 
 import React from 'react';
+import { history } from '@/kit';
 export default class Login extends React.Component {
 
   componentDidMount() {
@@ -8,8 +9,8 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div style={styles.container} >
-        q111111112
+      <div style={styles.container} onClick={()=>history.push('/')}>
+        q11111
       </div>
     );
   }
