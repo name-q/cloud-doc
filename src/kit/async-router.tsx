@@ -65,7 +65,6 @@ export default function AsyncRoute(props: any) {
  * 异步load模块组件
  */
 class AsyncLoader extends React.Component<any, any> {
-  // @ts-ignore
   props: {
     subRoutes?: Array<IRoute>;
     load: Loader;
@@ -81,7 +80,6 @@ class AsyncLoader extends React.Component<any, any> {
     load: noop,
     handlePathMatched: noop
   };
-  // @ts-ignore
   constructor(props) {
     super(props);
     this.state = {
@@ -93,7 +91,6 @@ class AsyncLoader extends React.Component<any, any> {
     const { load } = this.props;
 
     const { handlePathMatched } = this.props;
-    // @ts-ignore
     handlePathMatched(this.props.match.path);
 
     load().then((Component) =>

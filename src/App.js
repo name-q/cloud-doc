@@ -4,15 +4,19 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { history, routeWithSubRoutes, noop } from './kit'
 import { homeRoutes } from './routers'
 
-import Login from './pages/login';
+import Main from './pages/main';
 
 const App = () => (
-  <Router history={history}>
-    <Switch>
-      {routeWithSubRoutes(homeRoutes, noop)}
-      <Route component={Login} />
-    </Switch>
-  </Router>
+  <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Router history={history}>
+      <Switch>
+        {/* 开放路由 */}
+        {routeWithSubRoutes(homeRoutes, noop)}
+        {/* 需登入后展示的路由 */}
+        <Route component={Main} />
+      </Switch>
+    </Router>
+  </div>
 );
 
 export default App;

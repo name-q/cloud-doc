@@ -19,10 +19,8 @@ export interface IRoute {
  * @param routes
  * @param handlePathMatched
  */
-//  @ts-ignore
 export default function routeWithSubRoutes(routes, handlePathMatched) {
   console.log('routes------>', routes);
-  // @ts-ignore
   return routes.map((route, index) => {
     //dev check
     if (process.env.NODE_ENV !== 'production') {
@@ -37,7 +35,6 @@ export default function routeWithSubRoutes(routes, handlePathMatched) {
       return (
         <Route
           key={index}
-          // @ts-ignore
           exact={route.exact}
           path={route.path}
           strict={route.strict}
