@@ -13,32 +13,33 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@/kit/*": [
+        "kit/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/routers/*": [
+        "routers/*"
+      ],
+      "@/assets/*": [
+        "assets/*"
+      ],
+      "@/redux/*": [
+        "redux/*"
+      ],
+    },
   },
   "include": [
-    "src"
+    "src",
+    "src/**/*"
   ],
-  "baseUrl": "./src",
-  "paths": {
-    "@/kit/*": [
-      "kit/*"
-    ],
-    "@/pages/*": [
-      "pages/*"
-    ],
-    "@/routers/*": [
-      "routers/*"
-    ],
-    "@/assets/*": [
-      "assets/*"
-    ],
-    "@/redux/*": [
-      "redux/*"
-    ],
-  },
 }
