@@ -39,3 +39,13 @@ index ffbb15d..6930868 100644
      });
  
      ['SIGINT', 'SIGTERM'].forEach(function (sig) {
+diff --git a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+index 949f34a..964eb7a 100644
+--- a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
++++ b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+@@ -295,4 +295,4 @@ function verifyTypeScriptSetup() {
+   }
+ }
+ 
+-module.exports = verifyTypeScriptSetup;
++module.exports = ()=>{};
