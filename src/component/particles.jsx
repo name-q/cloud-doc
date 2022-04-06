@@ -7,11 +7,11 @@ export default class Particles extends Component {
 
   render() {
     let config = {
-      num: [1,3],
-      rps: 0.1,
+      num: [3,8],
+      rps: 0.5,
       radius: [5, 10],
       life: [1.5, 3],
-      v: [2, 3],
+      v: [1, 3],
       tha: [90, 160],
       alpha: [0.6, 0],
       scale: [.1, 0.4],

@@ -34,18 +34,22 @@ app.whenReady().then(() => {
 
 // 所有IPC方法
 const mountMainIPC = () => {
-  
-  /* 异步通讯 需监听返回值 */ 
+
+  /* 异步通讯 需监听返回值 */
   // ipcMain.on('asynchronous-message', function(event, arg) {
   //   console.log(arg)
   //   event.sender.send('asynchronous-reply', 'pong');
   // });
-  
+
   /* 同步通讯 即得返回值 */
   // ipcMain.on('synchronous-message', function(event, arg) {
   //   console.log(arg)
   //   event.returnValue = 'pong';
   // });
 
+  // 退出程序
+  ipcMain.on('exit', () => {
+    app.exit()
+  });
 
 }

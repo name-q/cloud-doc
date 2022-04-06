@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {asyncSend} from '@/kit/ipc'
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -45,7 +46,7 @@ class LoginForm extends React.Component<reduxIProps> {
             <a className="login-form-forgot" href='!#' onClick={e => e.preventDefault()}>
               忘记密码
             </a>
-            <a className="login-form-exit" href='!#' onClick={e => e.preventDefault()}>
+            <a className="login-form-exit" href='!#' onClick={e => this.handleExit(e)}>
               退出
             </a>
           </FormItem>
@@ -73,6 +74,11 @@ class LoginForm extends React.Component<reduxIProps> {
   onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
+
+  handleExit = (e:any) =>{
+    e.preventDefault()
+    asyncSend('exit');
+  }
 
 }
 
