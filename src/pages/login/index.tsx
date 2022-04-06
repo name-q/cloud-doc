@@ -2,6 +2,11 @@
 
 import React from 'react';
 
+import { Particles } from '@/component/index'
+import Form from './component/Form'
+import './index.less'
+import Logo from '@/assets/logo.png'
+
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
 import loginMain from './redux-item/reducers/main';
@@ -12,7 +17,6 @@ registerReducer({ loginMain });
 
 class Login extends React.Component<reduxIProps> {
 
-
   componentDidMount() {
     this.props.actions.init()
   }
@@ -22,22 +26,20 @@ class Login extends React.Component<reduxIProps> {
   }
 
   render() {
-    let {main:{testText},actions:{action:{commonChange}}} = this.props
     return (
-      <div style={styles.container} onClick={()=>commonChange('main.testText','on click')}>
-        {testText}
+      <div className='container' >
+        <div className='form-box'>
+          <img src={Logo} alt="LOGO" className='logo' />
+          <Form />
+        </div>
+
+        <Particles />
       </div>
     );
   }
+
+
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-  }
-};
 
 export default connect(store2Props, actions)(Login)

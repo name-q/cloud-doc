@@ -36,6 +36,9 @@
       "@/redux/*": [
         "redux/*"
       ],
+      "@/component/*": [
+        "component/*"
+      ],
     },
     "downlevelIteration": true,
   },
