@@ -5,6 +5,7 @@ import { fromJS } from 'immutable';
 import { isLogin } from './util';
 import noop from './noop'
 import { Spin } from 'antd';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 import { IRoute } from './route-with-subroutes';
 
@@ -122,7 +123,7 @@ class AsyncLoader extends React.Component<any, any> {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <Spin />
+        <Spin indicator={<Loading3QuartersOutlined style={{ fontSize: 80 }} spin />} />
       </div>
     );
   }

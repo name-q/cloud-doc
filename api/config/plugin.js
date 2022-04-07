@@ -12,4 +12,9 @@ module.exports = {
     package: 'egg-redis',
   },
   
+  cors: {
+    enable: true,
+    package: 'egg-cors',
+  },
+
 };

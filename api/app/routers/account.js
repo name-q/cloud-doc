@@ -21,6 +21,6 @@ module.exports = (app, whoami) => {
     // 需登入后才可调用的API
     const tokencheck = whoami({ api: 'user-login-ok' })
 
-    // 获取个人配置 及 公共配置 
-    // get('/api/configs',tokencheck, account.getVerificationCode)
+    // ping 校验QWT是否过期 如登入状态正常则返回QWT解密后的数据
+    get('/api/ping',tokencheck, account.ping)
 }

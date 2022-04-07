@@ -31,17 +31,17 @@ class QWTService extends Service {
      *-> yscene 应用场景
      *-> data   token存的内容 
      *-> redisId 一般为mongo中的_ID
-     *-> endms  多少毫秒后过期
+     *-> endms  多少毫秒后过期 SSS 默认3周
 
      *=> QWT | false(生成QWT失败)
     */
-    async createQWT(yscene, data, redisId, endms = 604800000) {
+    async createQWT(yscene, data, redisId, endms = 1814400000) {
         let { ctx, config } = this
         try {
             // HEAD密文
             let encHEAD = ctx.helper.getMd5(this.HEAD(yscene))
             // BODY密文
-            let encBODY = ctx.helper.getRSA(this.BODY(data, endms, redisId), config.PRIVATE_KEY)
+            let encBODY = ctx.helper.getRSA(await this.BODY(data, endms, redisId), config.PRIVATE_KEY)
             // TAIL密文
             let encTAIL = this.TAIL(encHEAD, encBODY)
 
@@ -77,7 +77,7 @@ class QWTService extends Service {
         let encHEAD = ctx.helper.getMd5(this.HEAD(yscene))
         if (encHEAD !== getHEAD) throw '头部校验失败'
         // 解析身
-        let { data, endTime, ...redisID } = JSON.parse(ctx.helper.RSAget(getBODY))
+        let { data, endTime, ...redis } = JSON.parse(ctx.helper.RSAget(getBODY, this.config.PUBLIC_KEY))
         // 超时验证
         if (endTime <= new Date().getTime()) throw '超时失效'
         // 唯一性验证
@@ -85,9 +85,8 @@ class QWTService extends Service {
         _id = 'qy' + _id
         let pass = await this.app.redis.get(_id)
         if (!pass) throw '唯一性验证失败'
-        let getPass = redisID[_id]
-        if (getPass !== pass) throw '唯一性验证失败'
-
+        let getPass = redis[_id]
+        if (getPass.toString() !== pass) throw '唯一性验证失败'
         // data挂载ctx
         ctx.data = data
     }
@@ -109,17 +108,17 @@ class QWTService extends Service {
     /* 创建身 
      *-> data  token存的内容 
      *-> endms 多少毫秒后过期 默认7天
-     *-> redisId 一般为qy+mongo中的_ID
+     *-> _id mongo中的_id
     */
-    BODY = async (data, endms = 604800000, redisID) => {
+    BODY = async (data, endms = 604800000, _id) => {
         if (!data || isNaN(endms)) {
             throw '需提供有效内容'
         };
-        redisID = 'qy' + redisID
+        let redisID = 'qy' + _id
         let nowss = Date.parse(new Date())
         await this.app.redis.set(redisID, nowss)
         return JSON.stringify({
-            data,
+            data: { ...data, _id },
             endTime: nowss + endms,
             [redisID]: nowss
         })

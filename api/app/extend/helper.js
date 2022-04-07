@@ -26,12 +26,12 @@ module.exports = {
 
     // 邮箱校验
     isMail(mail) {
-        return /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/.test(mail)
+        return /^([a-zA-Z0-9_\-\.])+\@([a-zA-Z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(mail)
     },
 
     // 密码校验
     isPassword(password) {
-        return /^[0-9A-Za-z]+$/.test(password) && password?.length <= 20
+        return /^[0-9a-zA-Z]{6,20}$/.test(password)
     },
 
     // 昵称校验

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, screen, ipcMain } = require('electron')
 // 去除安全警告 react-router-dom 会被安全meta限制
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 const path = require('path');
@@ -8,13 +8,16 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 350,
-    height: 700,
+    width: screen.getPrimaryDisplay().workAreaSize.height * 0.4,
+    height: screen.getPrimaryDisplay().workAreaSize.height * 0.8,
     frame: false,
     resizable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      // session
+      webSecurity: false,
+      allowRunningInsecureContent: true,
     }
   });
   // isDev 判断是开发模式还是产品模式

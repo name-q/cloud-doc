@@ -35,12 +35,14 @@ class AccountController extends Controller {
     // 用户邮箱 密码 验证码
     let { mail, password, verificationCode } = ctx.request.body
     try {
+      console.log('验证码校验>>', verificationCode)
       // 验证码校验
       await this.ctx.service.verify.parse('account.getVerificationCode', verificationCode)
 
       let result = await ctx.service.account.loginAccount(mail, password)
       if (result?._id) {
-        let qwt = await ctx.service.qwt.createQWT('user-login-ok', { mail }, result._id)
+        let { _id, nick } = result
+        let qwt = await ctx.service.qwt.createQWT('user-login-ok', { mail, nick }, _id)
         ctx.successbody(qwt)
         return
       }
@@ -54,6 +56,13 @@ class AccountController extends Controller {
   async changePassword() {
 
   }
+
+  // ping 校验QWT是否过期 如登入状态正常则返回QWT解密后的数据
+  async ping() {
+    const { ctx } = this;
+    ctx.successbody(ctx.data)
+  }
+
 }
 
 module.exports = AccountController;

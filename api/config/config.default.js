@@ -41,6 +41,10 @@ module.exports = appInfo => {
         ignore: ctx => ctx.request.url.indexOf('/api') != -1 ? true : false
       },
     },
+    cors: {
+      origin:'*',
+      allowMethods: 'GET,PUT,POST,DELETE'
+    },
 
     proxy: true,
     maxProxyCount: 1,
@@ -50,7 +54,7 @@ module.exports = appInfo => {
 
   const userConfig = {
     // QWT过期时间 60天
-    qwtEndTime: 5184000000, 
+    qwtEndTime: 5184000000,
     // RSA加密私钥
     PRIVATE_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_private_key.pem'), 'ascii'),
     // RSA解密公钥

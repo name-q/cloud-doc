@@ -2,10 +2,11 @@
 
 import React from 'react';
 
-import { Particles } from '@/component/index'
 import Form from './component/Form'
+import Particles from '@/compon/particles/index'
 import './index.less'
 import Logo from '@/assets/logo.png'
+import { isLogin, history } from '@/kit/index'
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -15,9 +16,13 @@ import actions from './redux-item/actions';
 import { reduxIProps } from './redux-item/types'
 registerReducer({ loginMain });
 
-class Login extends React.Component<reduxIProps> {
+class Login extends React.Component<reduxIProps,any> {
 
   componentDidMount() {
+
+    // 登入过的就不用初始化
+    if(isLogin()) history.push('/')
+
     this.props.actions.init()
   }
 

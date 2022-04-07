@@ -44,6 +44,6 @@ export default (dispatch: Dispatch) => {
 // eslint-disable-next-line
 function getData(): IAllReducerProps {
   return {
-    main: getReducerData('loginMain'),
+    main: getReducerData('overviewMain'),
   };
 }

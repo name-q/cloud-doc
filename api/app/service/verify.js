@@ -10,7 +10,7 @@ class VerifyService extends Service {
     async parse(sessionKey, enterVerify) {
         let trueVerify = this.ctx.session[sessionKey]
         console.log(sessionKey, enterVerify, '<user true>', trueVerify, '<<<<<验证码解析')
-        if (!enterVerify || !trueVerify || trueVerify !== enterVerify) throw '操作失败'
+        if (!enterVerify || !trueVerify || trueVerify !== enterVerify) throw '验证码错误'
     }
 
     // 易于识别的数字验证码
@@ -20,7 +20,7 @@ class VerifyService extends Service {
             size,
             ignoreChars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz40',
             fontSize: 150,
-            width: 500,
+            width: 300,
             height: 150,
             background: '#e6f7ff',
             noise: 3

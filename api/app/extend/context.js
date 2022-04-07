@@ -10,4 +10,7 @@ module.exports = {
         this.body = { code, data }
     },
 
+    LoginExpiration( data, code = 2 ) {
+        this.body = { code, data }
+    },
 };
