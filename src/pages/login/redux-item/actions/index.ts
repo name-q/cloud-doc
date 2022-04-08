@@ -3,6 +3,8 @@ import { Dispatch } from '@/redux/types';
 import { getActionProxy } from '@/redux/action-util';
 import Action from './action';
 
+import { asyncSend } from '@/kit/ipc'
+
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
   const actions = {
@@ -12,14 +14,7 @@ export default (dispatch: Dispatch) => {
      * 初始化数据
      */
     async init() {
-      dispatch({
-        type: Command.init,
-        payload: {
-          main: {
-            testText: 'redux test output'
-          },
-        },
-      });
+      asyncSend('changeWindowsSize')
     },
 
     /**

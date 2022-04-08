@@ -17,7 +17,7 @@ export interface IAsyncResult {
 // 补充： publicApi-是否是公开接口（qwt不存在依旧可以访问） noCache-不要缓存接口值（有验证码或动态访问的接口不要缓存）
 interface RequestInitx extends RequestInit {
   publicApi?: boolean
-  noCache?:boolean
+  noCache?: boolean
 }
 
 /**
@@ -64,10 +64,15 @@ export default async function Fetch(
     }
     const merge = Object.assign({}, request, init);
 
-    // 如果无缓存则查询接口 并将接口返回的成功值缓存1mm
-    storageKey = getMd5(storageKey)
-    let storage = getStorage(storageKey)
-    let resJSON = storage
+    let storage = ''
+    let resJSON: any = ''
+    if (!init.noCache) {
+      // 如果无缓存则查询接口 并将接口返回的成功值缓存1mm
+      storageKey = getMd5(storageKey)
+      storage = getStorage(storageKey)
+      resJSON = storage
+    }
+
     if (!storage) {
       // 去掉url中可能存在的//
       let url = config.HOST + api;

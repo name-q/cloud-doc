@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 // 去除安全警告 react-router-dom 会被安全meta限制
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 const path = require('path');
@@ -8,10 +8,10 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: screen.getPrimaryDisplay().workAreaSize.height * 0.4,
-    height: screen.getPrimaryDisplay().workAreaSize.height * 0.8,
+    width: 350,
+    height: 750,
     frame: false,
-    resizable: false,
+    // resizable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -51,4 +51,10 @@ const mountMainIPC = () => {
     app.exit()
   });
 
+  // 改变窗口大小
+  ipcMain.on('changeWindowsSize', (event, arg = '350,750') => {
+    let [w, h] = arg.split(',')
+    mainWindow.setSize(parseInt(w), parseInt(h))
+    event.reply('changeWindowsSize', `changeWindowsSize ${w} X ${h} OK!`)
+  })
 }

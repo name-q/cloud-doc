@@ -4,6 +4,7 @@ import React from 'react';
 
 import Form from './component/Form'
 import Particles from '@/compon/particles/index'
+import BgMusic from '@/compon/bgmusic/index'
 import './index.less'
 import Logo from '@/assets/logo.png'
 import { isLogin, history } from '@/kit/index'
@@ -16,12 +17,11 @@ import actions from './redux-item/actions';
 import { reduxIProps } from './redux-item/types'
 registerReducer({ loginMain });
 
-class Login extends React.Component<reduxIProps,any> {
+class Login extends React.Component<reduxIProps, any> {
 
   componentDidMount() {
-
     // 登入过的就不用初始化
-    if(isLogin()) history.push('/')
+    if (isLogin()) history.push('/')
 
     this.props.actions.init()
   }
@@ -39,6 +39,7 @@ class Login extends React.Component<reduxIProps,any> {
         </div>
 
         <Particles />
+        <BgMusic />
       </div>
     );
   }

@@ -2,8 +2,11 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 
 // 发送异步消息
-export const asyncSend = (key: string) => {
-    ipcRenderer.send(key);
+export const asyncSend = async (key: string, value?: string) => {
+    ipcRenderer.send(key, value);
+    let replyMessage = await getAsyncSend(key)
+    ipcRenderer.removeListener(key, () => { })
+    console.log(replyMessage, '<<<<replyMessage')
 }
 
 // 监听异步返回

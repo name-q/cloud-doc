@@ -6,6 +6,9 @@ import * as immerUtil from '@/redux/immer-util';
 
 const INITIAL_STATE: IMainReducer = {
   isReady: false,
+  mail:'',
+  nick:'',
+  _id:'',
 };
 
 export default function main(
