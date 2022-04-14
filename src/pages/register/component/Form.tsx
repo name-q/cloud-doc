@@ -12,15 +12,15 @@ import * as _ from 'lodash';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
-import loginMain from '../redux-item/reducers/main';
+import registerMain from '../redux-item/reducers/main';
 import { store2Props } from '../redux-item/selectors';
 import actions from '../redux-item/actions';
 import { reduxIProps } from '../redux-item/types'
-registerReducer({ loginMain });
+registerReducer({ registerMain });
 
 const FormItem = Form.Item
 
-class LoginForm extends React.Component<reduxIProps, any> {
+class registerForm extends React.Component<reduxIProps, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class LoginForm extends React.Component<reduxIProps, any> {
     return (
       <Form
         name="normal_login"
-        className="login-form"
+        className="register-form"
         onFinish={this.onFinish}
         ref={this.formRef}
       >
@@ -53,7 +53,7 @@ class LoginForm extends React.Component<reduxIProps, any> {
             }
           ]}
         >
-          <Input prefix={<MailOutlined className="site-form-item-icon" />} />
+          <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder='邮箱' />
         </FormItem>
 
         <FormItem
@@ -71,6 +71,46 @@ class LoginForm extends React.Component<reduxIProps, any> {
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
+            placeholder='密码'
+          />
+        </FormItem>
+
+        <FormItem
+          name="passwordRepeat"
+          rules={[
+            { required: true, message: '请重复输入密码' },
+            {
+              validator: async (rule, value) => {
+                if (!value || this.formRef.current.getFieldValue('password') !== value) return Promise.reject('两次密码不一致')
+                if (validate.password.test(value)) return Promise.resolve()
+                return Promise.reject('请输入6-20位数字或字母')
+              }
+            }
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder='重复密码'
+          />
+        </FormItem>
+
+
+        <FormItem
+          name="nick"
+          rules={[
+            { required: true, message: '请输入昵称' },
+            {
+              validator: async (rule, value) => {
+                if (validate.noChar.test(value)) return Promise.resolve()
+                return Promise.reject('昵称不能包含特殊符号')
+              }
+            }
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            placeholder='昵称'
           />
         </FormItem>
 
@@ -99,21 +139,12 @@ class LoginForm extends React.Component<reduxIProps, any> {
         </FormItem>
 
         <FormItem>
-          <a className="login-form-forgot" href='!#' onClick={e => e.preventDefault()}>
-            忘记密码
-          </a>
-          <a className="login-form-exit" href='!#' onClick={e => this.handleExit(e)}>
-            退出
-          </a>
-        </FormItem>
-
-        <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button" block>
-              登入
-            </Button>
-            <Button className="login-form-button" block onClick={() => history.push('/register')}>
-              注册
-            </Button>
+          <Button type="primary" htmlType="submit" className="register-form-button" block>
+            注册
+          </Button>
+          <Button className="register-form-button" block onClick={() => { history.goBack() }}>
+            返回
+          </Button>
         </FormItem>
 
       </Form>
@@ -126,19 +157,14 @@ class LoginForm extends React.Component<reduxIProps, any> {
 
   onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
-    let result = await this.props.actions.action.login(values)
+    let result = await this.props.actions.action.register(values)
     if (result === 'RefreshCode') {
       this.refreshVerificationCode()
       this.formRef.current.setFieldsValue({ verificationCode: '' })
     }
   };
 
-  handleExit = (e: any) => {
-    e.preventDefault()
-    asyncSend('exit');
-  }
-
 }
 
 
-export default connect(store2Props, actions)(LoginForm)
+export default connect(store2Props, actions)(registerForm)
