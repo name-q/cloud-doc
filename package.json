@@ -36,7 +36,8 @@
     "start": "craco start",
     "build": "craco build",
     "dev": "concurrently \"wait-on http://localhost:1234 && electron .\" \"yarn start\" \"cd api && yarn dev\" ",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
