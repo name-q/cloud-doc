@@ -1,8 +1,7 @@
-
-
 import React from 'react';
 
 import './index.less'
+import { Layout } from 'antd';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -12,7 +11,10 @@ import actions from './redux-item/actions';
 import { reduxIProps } from './redux-item/types'
 registerReducer({ overviewMain });
 
-class OverView extends React.Component<reduxIProps,any> {
+const { Header, Footer, Sider, Content } = Layout;
+
+
+class OverView extends React.Component<reduxIProps, any> {
 
   componentDidMount() {
     this.props.actions.init()
@@ -24,9 +26,14 @@ class OverView extends React.Component<reduxIProps,any> {
 
   render() {
     return (
-      <div className='container' >
-
-      </div>
+      <Layout className='overView'>
+        <Header>Header</Header>
+        <Layout>
+          <Sider>Sider</Sider>
+          <Content>Content</Content>
+        </Layout>
+        <Footer>Footer</Footer>
+      </Layout>
     );
   }
 

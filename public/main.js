@@ -37,7 +37,7 @@ const mountMainIPC = () => {
   /* 异步通讯 需监听返回值 */
   // ipcMain.on('asynchronous-message', function(event, arg) {
   //   console.log(arg)
-  //   event.sender.send('asynchronous-reply', 'pong');
+  //   event.reply('asynchronous-reply', 'pong');
   // });
 
   /* 同步通讯 即得返回值 */
@@ -56,5 +56,11 @@ const mountMainIPC = () => {
     let [w, h] = arg.split(',')
     mainWindow.setSize(parseInt(w), parseInt(h))
     event.reply('changeWindowsSize', `changeWindowsSize ${w} X ${h} OK!`)
+  })
+
+  // 窗口最小化
+  ipcMain.on('minimize', (event, arg) => {
+    mainWindow.minimize()
+    event.reply('minimize', 'minimize OK!')
   })
 }

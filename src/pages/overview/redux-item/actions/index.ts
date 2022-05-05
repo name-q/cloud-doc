@@ -31,8 +31,7 @@ export default (dispatch: Dispatch) => {
         })
 
         // 改变窗口大小
-        asyncSend('changeWindowsSize','780,600')
-        console.log('changeWindowsSize')
+        asyncSend('changeWindowsSize', '1000,670')
       } else {
         message.error('请重新登入')
         removeStorage(cache.LOGIN_DATA)
