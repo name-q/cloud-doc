@@ -4,7 +4,7 @@ import { IAllReducerProps } from '../types';
 import { getReducerData } from '@/redux/store';
 import { extraPathsValue } from '@/redux/util';
 
-import { Fetch, setStorage, cache, history } from '@/kit/index'
+import { Fetch, history } from '@/kit/index'
 import { message } from 'antd';
 
 // eslint-disable-next-line

@@ -5,7 +5,6 @@ import React from 'react';
 import { FormInstance } from 'antd/lib/form';
 import { Form, Button, Input } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { asyncSend } from '@/kit/ipc'
 import { validate, history } from '@/kit/index';
 import config from '@/config/index';
 import * as _ from 'lodash';
