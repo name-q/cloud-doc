@@ -3,7 +3,7 @@
  */
 
 const storageKey = {
-  LOGIN_DATA: 'cloud-docx@login', //登录信息缓存
+  LOGIN_DATA: 'zao-ji@login', //登录信息缓存
 };
 
 export default storageKey

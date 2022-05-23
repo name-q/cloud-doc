@@ -1,5 +1,5 @@
 {
-  "name": "cloud-docx",
+  "name": "zao-ji",
   "version": "1.0.0",
   "description": "operation oss obs cos",
   "private": true,
@@ -30,8 +30,8 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-cloud-docx",
-    "stop": "egg-scripts stop --title=egg-server-cloud-docx",
+    "start": "egg-scripts start --daemon --title=egg-server-zao-ji",
+    "stop": "egg-scripts stop --title=egg-server-zao-ji",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
