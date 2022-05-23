@@ -5,6 +5,7 @@ import Fetch from './fetch';
 import validate from './validate';
 import cache from "./cache";
 import {isLogin, setStorage, getStorage, removeStorage, getMd5} from "./util";
+import msg from './msg'
 
 export {
     history,
@@ -18,4 +19,5 @@ export {
     getStorage, 
     removeStorage, 
     getMd5,
+    msg,
 }
