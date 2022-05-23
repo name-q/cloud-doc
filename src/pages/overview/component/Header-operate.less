@@ -1,0 +1,45 @@
+.headerOperate {
+  display: flex;
+  flex: 1;
+
+  .leftArea {
+    width: 200px;
+    height: 100%;
+    background-color: #f6f6f6;
+
+    .closeMinusButton, .closeMinusButtonX {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .closeMinusButtonX {
+      position: relative;
+      top: -40px;
+
+      .close, .minus {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #fc605c;
+        &:hover {
+          opacity: 0;
+        }
+      }
+      .minus {
+        background-color: #fdbc40;
+      }
+      
+    }
+  }
+
+  .rightArea {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+}

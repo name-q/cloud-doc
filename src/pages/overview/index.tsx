@@ -3,6 +3,9 @@ import React from 'react';
 import './index.less'
 import { Layout } from 'antd';
 
+import HeaderOperate from './component/Header-operate'
+import SearchInfoModal from '@/compon/search-info-modal';
+
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
 import overviewMain from './redux-item/reducers/main';
@@ -26,14 +29,21 @@ class OverView extends React.Component<reduxIProps, any> {
 
   render() {
     return (
-      <Layout className='overView'>
-        <Header>Header</Header>
-        <Layout>
-          <Sider>Sider</Sider>
-          <Content>Content</Content>
+      <>
+        <Layout className='overView'>
+          <Header>
+            <HeaderOperate />
+          </Header>
+          <Layout>
+            <Sider>Sider</Sider>
+            <Content>Content</Content>
+          </Layout>
+          <Footer>Footer</Footer>
         </Layout>
-        <Footer>Footer</Footer>
-      </Layout>
+
+        {/* 公用组件 -msg-通信 */}
+        <SearchInfoModal />
+      </>
     );
   }
 
