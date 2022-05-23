@@ -37,7 +37,7 @@ const mountMainIPC = () => {
   /* 异步通讯 需监听返回值 */
   // ipcMain.on('asynchronous-message', function(event, arg) {
   //   console.log(arg)
-  //   event.reply('asynchronous-reply', 'pong');
+  //   event.reply('asynchronous-message', 'pong');
   // });
 
   /* 同步通讯 即得返回值 */
