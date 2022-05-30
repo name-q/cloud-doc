@@ -7,9 +7,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // 文字不能被选中
+  -webkit-user-seletct: none;
+  -moz-user-seletct: none;
+  -ms-user-seletct: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+// 进度条样式
+::-webkit-scrollbar {
+  width: 0px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #fff;
+  opacity: 0;
+}
+
+.ant-input-affix-wrapper, .ant-input-affix-wrapper-focused {
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  box-shadow: none !important;
+  border-radius: 0;
 }
