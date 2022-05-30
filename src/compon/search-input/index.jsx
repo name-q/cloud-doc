@@ -4,7 +4,7 @@ import { Input } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import './index.less'
 
-import { msg } from '@/kit/index'
+import { msg, setStorage, getStorage, cache } from '@/kit/index'
 
 
 export default class SearchInput extends Component {
@@ -45,10 +45,25 @@ export default class SearchInput extends Component {
           }
           onChange={e => this.setState({ inputValue: e.target.value })}
           onFocus={() => msg.emit('searchInfoModalComponent-visible', true)}
+          onPressEnter={() => this.onEnter()}
         />
       </>
     );
   }
 
+  // 按下回车保存搜索内容到缓存（最多保存20条）
+  onEnter = () => {
+    let { inputValue } = this.state
+    if (!inputValue) return
+    let historyValue = getStorage(cache.SEARCH_HISTORY)
+    if (!historyValue) {
+      historyValue = [inputValue]
+    } else {
+      historyValue.unshift(inputValue)
+      historyValue = Array.from(new Set(historyValue))
+      historyValue = historyValue.slice(0, 20)
+    }
+    setStorage(cache.SEARCH_HISTORY, historyValue)
+  }
 }
 

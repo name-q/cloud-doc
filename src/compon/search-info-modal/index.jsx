@@ -3,6 +3,8 @@ import { findDOMNode } from 'react-dom'
 
 import { Drawer } from 'antd';
 
+import HotSearchList from "@/compon/hot-search-list";
+import SearchHistory from "./component/searchHistory";
 import './index.less'
 
 import { msg } from '@/kit/index'
@@ -27,9 +29,8 @@ export default class SearchInfoModal extends PureComponent {
   }
 
   componentWillUnmount() {
-    console.log('<<<<componentWillUnmount')
-    msg.on('searchInfoModalComponent-visible', visible => this.setState({ visible }))
-    msg.on('searchInfoModalComponent-inputValue', inputValue => this.setState({ inputValue }))
+    msg.off('searchInfoModalComponent-visible', visible => this.setState({ visible }))
+    msg.off('searchInfoModalComponent-inputValue', inputValue => this.setState({ inputValue }))
 
     document.removeEventListener('mousedown', (e) => this.handleClickOutside(e), false);
   }
@@ -41,7 +42,6 @@ export default class SearchInfoModal extends PureComponent {
     return (visible || inputValue) && (
 
       <center
-        className="clickBox"
         ref={element => this.drawer = element}
       >
         <Drawer
@@ -52,7 +52,8 @@ export default class SearchInfoModal extends PureComponent {
           visible={visible || inputValue}
           onClose={this.hideComponent}
         >
-          
+          <SearchHistory />
+          <HotSearchList />
         </Drawer>
       </center>
     )
