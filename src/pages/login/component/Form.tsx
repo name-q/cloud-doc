@@ -47,13 +47,14 @@ class LoginForm extends React.Component<reduxIProps, any> {
             { required: true, message: '请输入邮箱地址' },
             {
               validator: async (rule, value) => {
-                if (validate.email.test(value)) return Promise.resolve()
-                return Promise.reject('请输入正确的邮箱地址')
+                if (!validate.email.test(value)) return Promise.reject('请输入正确的邮箱地址')
+                if (value.length > 30) return Promise.reject('邮箱地址超长')
+                return Promise.resolve()
               }
             }
           ]}
         >
-          <Input prefix={<MailOutlined className="site-form-item-icon" />} />
+          <Input placeholder='邮箱' prefix={<MailOutlined className="site-form-item-icon" />} />
         </FormItem>
 
         <FormItem
@@ -69,6 +70,7 @@ class LoginForm extends React.Component<reduxIProps, any> {
           ]}
         >
           <Input
+            placeholder='密码'
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
           />

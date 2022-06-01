@@ -26,7 +26,7 @@ module.exports = {
 
     // 邮箱校验
     isMail(mail) {
-        return /^([a-zA-Z0-9_\-\.])+\@([a-zA-Z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(mail)
+        return /^([a-zA-Z0-9_\-\.])+\@([a-zA-Z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(mail) && mail.length < 30
     },
 
     // 密码校验
@@ -34,9 +34,9 @@ module.exports = {
         return /^[0-9a-zA-Z]{6,20}$/.test(password)
     },
 
-    // 昵称校验
+    // 昵称校验 长度不超过10 且不包含特殊符号
     isNick(nick) {
-        return nick?.length <= 10
+        return nick?.length <= 10 && /^[0-9a-zA-Z\u4E00-\u9FA5]*$/.test(nick)
     },
 
     // 获取秒级时间戳

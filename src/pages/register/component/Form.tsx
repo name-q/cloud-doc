@@ -46,8 +46,9 @@ class registerForm extends React.Component<reduxIProps, any> {
             { required: true, message: '请输入邮箱地址' },
             {
               validator: async (rule, value) => {
-                if (validate.email.test(value)) return Promise.resolve()
-                return Promise.reject('请输入正确的邮箱地址')
+                if (!validate.email.test(value)) return Promise.reject('请输入正确的邮箱地址') 
+                if (value.length > 30) return Promise.reject('邮箱地址超长') 
+                return Promise.resolve()
               }
             }
           ]}
@@ -101,8 +102,9 @@ class registerForm extends React.Component<reduxIProps, any> {
             { required: true, message: '请输入昵称' },
             {
               validator: async (rule, value) => {
-                if (validate.noChar.test(value)) return Promise.resolve()
-                return Promise.reject('昵称不能包含特殊符号')
+                if (!validate.noChar.test(value)) return Promise.reject('昵称不能包含特殊符号')
+                if (value.length > 10) return Promise.reject('昵称过长')
+                return Promise.resolve()
               }
             }
           ]}
