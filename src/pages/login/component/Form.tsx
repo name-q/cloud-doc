@@ -11,12 +11,9 @@ import config from '@/config/index';
 import * as _ from 'lodash';
 
 import { connect } from 'react-redux'
-import { registerReducer } from '@/redux/store';
-import loginMain from '../redux-item/reducers/main';
 import { store2Props } from '../redux-item/selectors';
 import actions from '../redux-item/actions';
 import { reduxIProps } from '../redux-item/types'
-registerReducer({ loginMain });
 
 const FormItem = Form.Item
 

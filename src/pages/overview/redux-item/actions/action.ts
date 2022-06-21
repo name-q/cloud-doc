@@ -4,7 +4,7 @@ import { IAllReducerProps } from '../types';
 import { getReducerData } from '@/redux/store';
 import { extraPathsValue } from '@/redux/util';
 
-import { Fetch, setStorage, cache, history } from '@/kit/index'
+import { Fetch } from '@/kit/index'
 import { message } from 'antd';
 
 // eslint-disable-next-line
@@ -17,23 +17,13 @@ export default (dispatch: Dispatch) => {
       });
     },
 
-    // 登入
-    async login(body) {
-      let { result } = await Fetch('/api/loginAccount', {
-        method: 'POST',
-        body,
-        publicApi: true,
-        noCache:true
-      })
-      if (result.code === 1) {
-        // 储存有效期为3周的 QWT
-        setStorage(cache.LOGIN_DATA, result.data, 1814400000)
-        message.success('登入成功')
-        history.push('/')
-      }else{
-        message.error(result.msg)
-        return 'RefreshCode'
-      }
+    // 获取用户信息
+    async getUserInfo() {
+      let { result } = await Fetch('/api/getUserInfo',{noCache:false})
+      if (result.code !== 1) message.error(result)
+
+      message.success('获取用户信息成功')
+      
     }
 
 

@@ -6,18 +6,8 @@ import './Header-operate.less'
 import SearchInput from '@/compon/search-input';
 import { CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons';
 
-
 import { asyncSend } from '@/kit/ipc'
-
-import { connect } from 'react-redux'
-import { registerReducer } from '@/redux/store';
-import overviewMain from '../redux-item/reducers/main';
-import { store2Props } from '../redux-item/selectors';
-import actions from '../redux-item/actions';
-import { reduxIProps } from '../redux-item/types'
-registerReducer({ overviewMain });
-
-class HeaderOperate extends React.Component<reduxIProps, any> {
+class HeaderOperate extends React.Component<any, any> {
 
   render() {
     return (
@@ -52,4 +42,4 @@ class HeaderOperate extends React.Component<reduxIProps, any> {
 
 }
 
-export default connect(store2Props, actions)(HeaderOperate)
+export default HeaderOperate
