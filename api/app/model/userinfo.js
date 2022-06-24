@@ -10,7 +10,7 @@ module.exports = app => {
                 required: true,
                 unique: true,
                 trim: true,
-                maxlength: 50,
+                maxlength: 30,
                 match: /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/
             },
             // 密码

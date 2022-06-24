@@ -1,0 +1,179 @@
+.avatarAndNick {
+  display: flex;
+  align-items: center;
+
+  .nickBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    p {
+      margin: 0;
+      max-width: 120px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+  }
+
+  .avatarEnter {
+    opacity: 0;
+    cursor: pointer;
+  }
+
+
+  &-titleComponent {
+    min-width: 300px;
+    height: 150px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .blockBox {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      padding-top: 20px;
+
+      .item {
+        width: 100px;
+        height: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+
+        .number {
+          font-size: 20px;
+          font-weight: bold;
+          color: #333;
+          line-height: 50px;
+        }
+
+        .mark {
+          color: #666;
+          font-weight: 400;
+          font-size: 14.333px;
+        }
+
+      }
+
+      .divider {
+        border-right: 1px solid #ededed;
+        border-left: 1px solid #ededed;
+        box-sizing: border-box;
+      }
+
+    }
+
+    .signInBox {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 150px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid #ededed;
+      transition-property: all;
+      transition-duration: 0.6s;
+      transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+
+      p {
+        margin: 0;
+        margin-left: 10px;
+        font-weight: 400;
+        color: #bfbfbf;
+      }
+
+      &:hover {
+        background-color: #ededed;
+        border: 1px solid #bfbfbf;
+        cursor: pointer;
+
+        p {
+          color: #666;
+        }
+
+        path:nth-child(1) {
+          fill: #666;
+        }
+      }
+    }
+  }
+
+
+  &-contentComponent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .rowBox,
+    .rowBoxline {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #f2f2f3;
+      }
+
+      .nick {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 10px;
+
+        p {
+          max-width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          margin: 0;
+          margin-left: 10px;
+        }
+      }
+
+      .level {
+        padding: 0px 5px;
+        background-image: -webkit-linear-gradient(bottom, #F56614, #ffede9, #ffede9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 22px;
+        word-spacing: -5px;
+        letter-spacing: 2.333px;
+
+        &-box {
+          background-color: #151514;
+          margin-right: 10px;
+          border-radius: 5px;
+          height: 22px;
+        }
+      }
+    }
+
+    .rowBoxline {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+  }
+
+}

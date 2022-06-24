@@ -29,7 +29,7 @@ export default (dispatch: Dispatch) => {
             }
           },
         })
-
+        actions.action.getUserInfo()
         // 改变窗口大小
         asyncSend('changeWindowsSize', '1000,670')
       } else {

@@ -56,4 +56,9 @@ module.exports = {
         console.log(`::::::${hint}:::::: ${JSON.stringify(data)}`)
     },
 
+    // 去掉标点符号
+    deleteSymbol(val) {
+        return val ? val.replace(/[^0-9A-Za-z]*/g, "") : ''
+    }
+
 }

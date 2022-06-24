@@ -8,4 +8,7 @@ module.exports = app => {
   // 账号相关
   require('./routers/account')(app, whoami)
 
+  // 用户相关
+  require('./routers/user')(app, whoami)
+
 };

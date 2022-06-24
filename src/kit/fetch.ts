@@ -70,7 +70,7 @@ export default async function Fetch(
       // 如果无缓存则查询接口 并将接口返回的成功值缓存1mm
       storageKey = getMd5(storageKey)
       storage = getStorage(storageKey)
-      resJSON = storage
+      resJSON = storage ? JSON.parse(storage) : ''
     }
 
     if (!storage) {

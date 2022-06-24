@@ -5,6 +5,7 @@ import { Layout } from 'antd';
 
 import HeaderOperate from './component/Header-operate'
 import SearchInfoModal from '@/compon/search-info-modal';
+import AvatarAndNick from './component/Avatar-and-nick';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -35,7 +36,9 @@ class OverView extends React.Component<reduxIProps, any> {
             <HeaderOperate />
           </Header>
           <Layout>
-            <Sider>Sider</Sider>
+            <Sider>
+              <AvatarAndNick />
+            </Sider>
             <Content>Content</Content>
           </Layout>
           <Footer>Footer</Footer>
