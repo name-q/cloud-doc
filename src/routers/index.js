@@ -1,16 +1,16 @@
-// 无需授权页面
-import HomeRouters from './home_routers';
+/***无需授权页面***/ 
+// 登入
+import LoginRouters from './home_routers';
 
-// 需授权访问页
-
+/***需授权页面***/ 
 // 首页
 import MainRouters from './main_routers';
 
 
-const routes = [
+const authRouters = [
     ...MainRouters,
 ];
 
-const homeRoutes = [...HomeRouters];
+const openRouters = [...LoginRouters];
 
-export {routes, homeRoutes};
+export { authRouters, openRouters };

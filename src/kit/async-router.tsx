@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { homeRoutes } from '../routers';
+import { openRouters } from '../routers';
 import { fromJS } from 'immutable';
 import { isLogin } from './util';
 import noop from './noop'
@@ -30,7 +30,7 @@ export default function AsyncRoute(props: any) {
     <Route
       {...rest}
       render={(props:any) => {
-        const unAuthRoutes = fromJS(homeRoutes);
+        const unAuthRoutes = fromJS(openRouters);
         if (
           // @ts-ignore
           unAuthRoutes.some((route) => route.get('path') === props.match.path)

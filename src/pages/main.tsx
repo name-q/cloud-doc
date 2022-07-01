@@ -3,7 +3,7 @@ import React from 'react';
 import {
   routeWithSubRoutes,
 } from '../kit';
-import { routes } from '../routers';
+import { authRouters } from '../routers';
 
 
 export default class Main extends React.Component {
@@ -23,7 +23,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <>
-        {routeWithSubRoutes(routes, this.handlePathMatched)}
+        {routeWithSubRoutes(authRouters, this.handlePathMatched)}
       </>
     );
   }

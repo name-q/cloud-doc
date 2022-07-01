@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Router, Route, Switch } from 'react-router-dom';
 import { history, routeWithSubRoutes, noop } from './kit'
-import { homeRoutes } from './routers'
+import { openRouters } from './routers'
 
 import Main from './pages/main';
 
@@ -11,7 +11,7 @@ const App = () => (
     <Router history={history}>
       <Switch>
         {/* 开放路由 */}
-        {routeWithSubRoutes(homeRoutes, noop)}
+        {routeWithSubRoutes(openRouters, noop)}
         {/* 需登入后展示的路由 */}
         <Route component={Main} />
       </Switch>
