@@ -30,7 +30,6 @@ export default function routeWithSubRoutes(routes, handlePathMatched) {
         );
       }
     }
-
     if (route.component) {
       return (
         <Route
@@ -41,7 +40,6 @@ export default function routeWithSubRoutes(routes, handlePathMatched) {
           render={(props:any) => (
             <route.component
               {...props}
-              subRoutes={route.routes}
               handlePathMatched={handlePathMatched}
             />
           )}
@@ -54,7 +52,6 @@ export default function routeWithSubRoutes(routes, handlePathMatched) {
           exact={route.exact}
           strict={route.strict}
           path={route.path}
-          subRoutes={route.routes}
           load={route.asyncComponent}
           handlePathMatched={handlePathMatched}
         />

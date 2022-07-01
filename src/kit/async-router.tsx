@@ -7,8 +7,6 @@ import noop from './noop'
 import { Spin } from 'antd';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 
-import { IRoute } from './route-with-subroutes';
-
 export type Loader = () => Promise<any>;
 
 export interface Props {
@@ -16,7 +14,6 @@ export interface Props {
   exact?: boolean;
   strict?: boolean;
   load: Loader;
-  subRoutes?: Array<IRoute>;
   handlePathMatched?: Function;
 }
 
@@ -25,7 +22,7 @@ export interface Props {
  * @param props 路由参数
  */
 export default function AsyncRoute(props: any) {
-  const { load, handlePathMatched, subRoutes, ...rest } = props;
+  const { load, handlePathMatched, ...rest } = props;
   return (
     <Route
       {...rest}
@@ -36,7 +33,7 @@ export default function AsyncRoute(props: any) {
           unAuthRoutes.some((route) => route.get('path') === props.match.path)
         ) {
           // 1.不需要登录权限,直接可以访问的页面
-          return <AsyncLoader {...props} load={load} subRoutes={subRoutes} />;
+          return <AsyncLoader {...props} load={load} />;
         } else {
           if (isLogin()) {
             // 2.1.需要登录权限,已经登录,则跳转路由对应的页面
@@ -44,7 +41,6 @@ export default function AsyncRoute(props: any) {
               <AsyncLoader
                 {...props}
                 load={load}
-                subRoutes={subRoutes}
                 handlePathMatched={handlePathMatched}
               />
             );
@@ -67,7 +63,6 @@ export default function AsyncRoute(props: any) {
  */
 class AsyncLoader extends React.Component<any, any> {
   props: {
-    subRoutes?: Array<IRoute>;
     load: Loader;
     handlePathMatched?: Function;
     match: any;
