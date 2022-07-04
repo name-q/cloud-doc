@@ -32,7 +32,8 @@ export default async function Fetch(
   try {
     let qwt = isLogin()
     // @ts-ignore
-    if ((!qwt && !init.publicApi) || !api) throw new error('未登入且不是公共接口 或未传接口则直接退出')
+    // eslint-disable-next-line 
+    if ((!qwt && !init.publicApi) || !api) throw '未登入且不是公共接口 或未传接口则直接退出'
 
     // 设置缓存的key
     let storageKey = api

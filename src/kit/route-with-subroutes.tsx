@@ -20,14 +20,14 @@ export interface IRoute {
  * @param handlePathMatched
  */
 export default function routeWithSubRoutes(routes, handlePathMatched) {
-  console.log('routes------>', routes);
+  // console.log('routes------>', routes);
   return routes.map((route, index) => {
     //dev check
     if (process.env.NODE_ENV !== 'production') {
       if (route.component === undefined && route.asyncComponent === undefined) {
-        throw new Error(
-          `${route.path} can not find component or asyncComponent`,
-        );
+        // @ts-ignore
+        // eslint-disable-next-line 
+        throw `${route.path} can not find component or asyncComponent`
       }
     }
     if (route.component) {

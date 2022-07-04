@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { openRouters } from '../routers';
 import { fromJS } from 'immutable';
@@ -21,12 +21,13 @@ export interface Props {
  * 封装异步路由的解决方案
  * @param props 路由参数
  */
-export default function AsyncRoute(props: any) {
+export default memo(function AsyncRoute(props: any) {
+  console.log('路由跳转------>', props.path)
   const { load, handlePathMatched, ...rest } = props;
   return (
     <Route
       {...rest}
-      render={(props:any) => {
+      render={(props: any) => {
         const unAuthRoutes = fromJS(openRouters);
         if (
           // @ts-ignore
@@ -56,7 +57,7 @@ export default function AsyncRoute(props: any) {
       }}
     />
   );
-}
+})
 
 /**
  * 异步load模块组件
