@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { routeWithSubRoutes } from '@/kit/index';
+import { authRouters } from '@/routers/index';
+
 import './index.less'
 import { Layout } from 'antd';
 
@@ -20,6 +23,14 @@ const { Header, Footer, Sider, Content } = Layout;
 
 class OverView extends React.Component<reduxIProps, any> {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      // 当前路由path
+      matchedPath: '',
+    };
+  }
+
   componentDidMount() {
     this.props.actions.init()
   }
@@ -39,7 +50,9 @@ class OverView extends React.Component<reduxIProps, any> {
             <Sider>
               <AvatarAndNick />
             </Sider>
-            <Content>Content</Content>
+            <Content>
+              {routeWithSubRoutes(authRouters, this.handlePathMatched)}
+            </Content>
           </Layout>
           <Footer>Footer</Footer>
         </Layout>
@@ -50,6 +63,11 @@ class OverView extends React.Component<reduxIProps, any> {
     );
   }
 
+  handlePathMatched = matchedPath => {
+    this.setState({
+      matchedPath
+    });
+  };
 
 }
 
