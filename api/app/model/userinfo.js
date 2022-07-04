@@ -44,6 +44,31 @@ module.exports = app => {
                 type: String,
                 trim: true,
             },
+            // 随笔数
+            essaysNumber: {
+                type: Number,
+                default: 0,
+            },
+            // 造极数
+            zaojiNumber: {
+                type: Number,
+                default: 0,
+            },
+            // 粉丝数
+            fansNumber: {
+                type: Number,
+                default: 0,
+            },
+            // 会员等级
+            level: {
+                type: Number,
+                default: 1,
+            },
+            // 最后签到时间戳
+            lastSignTime: {
+                type: Number,
+                default: 0,
+            },
         })
         , 'user_info'
     );

@@ -13,7 +13,8 @@ import { Popover, Image } from 'antd';
 import {
   CaretRightFilled, UserOutlined,
   CrownOutlined, SettingOutlined,
-  RightOutlined, DisconnectOutlined
+  RightOutlined, DisconnectOutlined,
+  MailOutlined,
 } from '@ant-design/icons'
 import defaultAvatar from '@/assets/avatar.png'
 import { goldCoin } from '@/assets/iconfontsvg'
@@ -96,6 +97,12 @@ class AvatarAndNick extends React.Component<reduxIProps, any> {
         <div className='nick'>
           <UserOutlined />
           <p>123456function=</p>
+        </div>
+      </div>
+      <div className='rowBox'>
+        <div className='nick'>
+          <MailOutlined />
+          <p>1620206666@qq.com</p>
         </div>
       </div>
       <div className='rowBoxline'>
