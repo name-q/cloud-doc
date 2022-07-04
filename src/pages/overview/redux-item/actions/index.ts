@@ -3,7 +3,7 @@ import { Dispatch } from '@/redux/types';
 import { getActionProxy } from '@/redux/action-util';
 import Action from './action';
 
-import { Fetch, cache, removeStorage, history } from '@/kit/index'
+import { Fetch, removeStorageAll, history } from '@/kit/index'
 import {asyncSend} from '@/kit/ipc'
 import { message } from 'antd';
 
@@ -34,7 +34,7 @@ export default (dispatch: Dispatch) => {
         asyncSend('changeWindowsSize', '1000,670')
       } else {
         message.error('请重新登入')
-        removeStorage(cache.LOGIN_DATA)
+        removeStorageAll()
         history.push('/login')
       }
 

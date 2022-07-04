@@ -36,6 +36,11 @@ export function removeStorage(key) {
   localStorage.removeItem(key)
 }
 
+// 删除所有缓存
+export function removeStorageAll() {
+  localStorage.clear()
+}
+
 // 获取MD5值
 export function getMd5(data, salt = '') {
   if (!data) return '';
