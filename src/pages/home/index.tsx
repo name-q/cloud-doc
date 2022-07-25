@@ -1,8 +1,7 @@
 import React from 'react';
 
 import './index.less'
-import { Button } from 'antd';
-
+import Swiper from '@/compon/swiper';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -26,9 +25,9 @@ class Home extends React.Component<reduxIProps, any> {
 
   render() {
     return (
-      <>
-        <Button>Home</Button>
-      </>
+      <div>
+        <Swiper />
+      </div>
     );
   }
 

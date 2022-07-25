@@ -1,0 +1,111 @@
+.slideComponent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // 滚动组件
+    .slideBox {
+        position: relative;
+        width: 95%;
+        margin: 0 auto;
+        height: 200px;
+
+        .slide {
+            position: absolute;
+            transition: all .5s ease-in-out;
+            max-height: 200px;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            img {
+                width: 100%;
+            }
+
+            .masking {
+                // 灰度渐变效果
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, .15);
+                transition: all 0.3s 0.2s linear;
+            }
+
+            &.middle {
+                // 中间展示
+                left: 15%;
+                bottom: 1%;
+                width: 70%;
+                z-index: 3;
+                .masking {
+                    background: transparent;
+                }
+            }
+
+            &.start {
+                // 左边展示
+                left: 0%;
+                bottom: 5%;
+                width: 60%;
+                z-index: 2;
+                .masking {
+                    background: transparent;
+                }
+            }
+
+            &.end {
+                // 右边展示
+                right: 0%;
+                bottom: 5%;
+                width: 60%;
+                z-index: 2;
+                .masking {
+                    background: transparent;
+                }
+                
+            }
+
+            &.normal {
+                // 多余被隐藏的数据 - 切换图片的动效与此样式有关
+                left: 2.5%;
+                right: 2.5%;
+                bottom: 5%;
+                width: 60%;
+                z-index: 1;
+            }
+        }
+    }
+
+    // 进度组件
+    .scheduleBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 10px;
+        min-width: 200px;
+        width: 40%;
+
+        &-silence {
+            width: 180px;
+            margin-right: 2%;
+            z-index: 99;
+            cursor: pointer;
+        }
+
+        .ant-progress-line {
+            margin-right: 2%;
+            .ant-progress-inner {
+                border-radius: 0%;
+                height: 2.333px;
+                .ant-progress-bg {
+                    border-radius: 0%;
+                }
+            }
+        }
+    }
+}
