@@ -7,8 +7,8 @@
     // 滚动组件
     .slideBox {
         position: relative;
-        width: 95%;
-        margin: 0 auto;
+        width: calc(100% - 40px);
+        margin: 10px auto 0;
         height: 200px;
 
         .slide {
@@ -21,7 +21,8 @@
             }
 
             img {
-                width: 100%;
+                width: 495px;
+                height: 180px;
             }
 
             .masking {
@@ -41,8 +42,13 @@
                 bottom: 1%;
                 width: 70%;
                 z-index: 3;
+                text-align: center;
                 .masking {
                     background: transparent;
+                }
+                img {
+                    width: 550px;
+                    height: 200px;
                 }
             }
 
@@ -50,7 +56,6 @@
                 // 左边展示
                 left: 0%;
                 bottom: 5%;
-                width: 60%;
                 z-index: 2;
                 .masking {
                     background: transparent;
@@ -61,8 +66,8 @@
                 // 右边展示
                 right: 0%;
                 bottom: 5%;
-                width: 60%;
                 z-index: 2;
+                text-align: right;
                 .masking {
                     background: transparent;
                 }
@@ -73,8 +78,8 @@
                 // 多余被隐藏的数据 - 切换图片的动效与此样式有关
                 left: 2.5%;
                 right: 2.5%;
-                bottom: 5%;
                 width: 60%;
+                bottom: 5%;
                 z-index: 1;
             }
         }
