@@ -50,7 +50,7 @@ class OverView extends React.Component<reduxIProps, any> {
             <Sider>
               <AvatarAndNick />
             </Sider>
-            <Content>
+            <Content style={{ overflowY: 'auto' }}>
               {routeWithSubRoutes(authRouters, this.handlePathMatched)}
             </Content>
           </Layout>
