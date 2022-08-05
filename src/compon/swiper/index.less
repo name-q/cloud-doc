@@ -13,7 +13,7 @@
 
         .slide {
             position: absolute;
-            transition: all .5s ease-in-out;
+            transition: all .3s ease-in-out;
             max-height: 200px;
 
             &:hover {
@@ -23,22 +23,20 @@
             img {
                 width: 495px;
                 height: 180px;
+                border-radius: 8px;
             }
 
             .masking {
-                // 灰度渐变效果
                 position: absolute;
-                left: 0;
                 top: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, .15);
-                transition: all 0.3s 0.2s linear;
             }
 
             &.middle {
                 // 中间展示
                 left: 15%;
+                right: 15%;
                 bottom: 1%;
                 width: 70%;
                 z-index: 3;
@@ -58,7 +56,7 @@
                 bottom: 5%;
                 z-index: 2;
                 .masking {
-                    background: transparent;
+                    background: rgba(222, 222, 222, 0.15);
                 }
             }
 
@@ -69,16 +67,14 @@
                 z-index: 2;
                 text-align: right;
                 .masking {
-                    background: transparent;
+                    background: rgba(222, 222, 222, 0.15);
                 }
-                
             }
 
             &.normal {
                 // 多余被隐藏的数据 - 切换图片的动效与此样式有关
-                left: 2.5%;
-                right: 2.5%;
-                width: 60%;
+                left: 20%;
+                right: 20%;
                 bottom: 5%;
                 z-index: 1;
             }
