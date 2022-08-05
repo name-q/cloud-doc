@@ -8,10 +8,10 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 350,
-    height: 750,
     frame: false,
     // resizable: false,
+    minWidth: 1000,
+    minHeight: 670,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
