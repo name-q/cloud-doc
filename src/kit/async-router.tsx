@@ -84,26 +84,15 @@ class AsyncLoader extends React.Component<any, any> {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { load } = this.props;
 
     const { handlePathMatched } = this.props;
     handlePathMatched(this.props.match.path);
-
-    load().then((Component) =>
-      this.setState({
-        Component: Component.default || Component
-      }, () => {
-        // 去掉鼠标悬停时的title=[object object]属性
-        const antdRows = document.getElementsByClassName('ant-row ant-form-item');
-        if (antdRows.length > 0) {
-          for (let i = 0; i < antdRows.length; i++) {
-            // @ts-ignore
-            antdRows[i].title = '';
-          }
-        }
-      })
-    );
+    let Component: any = await load
+    this.setState({
+      Component: Component.default || Component
+    })
   }
 
   render() {

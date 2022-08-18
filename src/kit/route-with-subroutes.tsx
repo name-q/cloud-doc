@@ -1,61 +1,37 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import AsyncRoute, { Loader } from './async-router';
-
-type TFnComponent = (...params: Array<any>) => any;
-
-
 export interface IRoute {
   path: string;
   strict?: boolean;
   exact?: boolean;
-  component?: any | TFnComponent;
-  asyncComponent?: Loader;
+  component?: Loader;
   routes?: Array<IRoute>;
 }
 
 /**
- * 路由相关
+ * 异步路由
  * @param routes
  * @param handlePathMatched
  */
 export default function routeWithSubRoutes(routes, handlePathMatched) {
-  // console.log('routes------>', routes);
   return routes.map((route, index) => {
-    //dev check
+
     if (process.env.NODE_ENV !== 'production') {
-      if (route.component === undefined && route.asyncComponent === undefined) {
+      if (route.component === undefined) {
         // @ts-ignore
         // eslint-disable-next-line 
-        throw `${route.path} can not find component or asyncComponent`
+        throw `路由<${route.path}>找不到component参数`
       }
     }
-    if (route.component) {
-      return (
-        <Route
-          key={index}
-          exact={route.exact}
-          path={route.path}
-          strict={route.strict}
-          render={(props:any) => (
-            <route.component
-              {...props}
-              handlePathMatched={handlePathMatched}
-            />
-          )}
-        />
-      );
-    } else {
-      return (
-        <AsyncRoute
-          key={index}
-          exact={route.exact}
-          strict={route.strict}
-          path={route.path}
-          load={route.asyncComponent}
-          handlePathMatched={handlePathMatched}
-        />
-      );
-    }
+    // 判断登入 -> 加载loading -> 渲染页面
+    return (
+      <AsyncRoute
+        key={index}
+        exact={route.exact}
+        strict={route.strict}
+        path={route.path}
+        load={route.component}
+        handlePathMatched={handlePathMatched}
+      />
+    );
   });
 }
