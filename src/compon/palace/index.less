@@ -1,12 +1,11 @@
 .PalaceComponent {
-    margin: 20px;
+    margin: 40px 30px 20px;
 
     .title {
         font-size: 18px;
         line-height: 28px;
         font-weight: 500;
-        margin-bottom:0 ;
-
+        margin-bottom: 0;
         width: max-content;
         cursor: pointer;
     }
@@ -16,15 +15,20 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-right: -2vw;
 
         .itemBox1 {
-            width: 14.2vw;
+            width: 13.3vw;
             margin: 10px 0;
+            cursor: pointer;
+            margin-right: 1.9vw;
+
             img {
-                width: 14.2vw;
-                height: 14.2vw;
+                width: 13.3vw;
+                height: 13.3vw;
                 border-radius: 6px;
             }
+
             .text {
                 color: #333;
                 display: -webkit-box;
@@ -38,4 +42,147 @@
             }
         }
     }
+
+    .PalaceItem2 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .itemBox2 {
+            width: 17vw;
+            margin: 10px 0;
+            cursor: pointer;
+
+            img {
+                width: 17vw;
+                height: 9.5vw;
+                border-radius: 6px;
+            }
+
+            .text {
+                color: #333;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                word-break: break-all;
+                overflow: hidden;
+                line-height: 18px;
+                text-align: justify;
+                margin: 2px 0;
+            }
+        }
+    }
+
+    .PalaceItem3 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .itemBox3 {
+            width: 48%;
+            flex-direction: row;
+            display: flex;
+            padding: 10px 0;
+            border: 1px solid #f7f7f7;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 0;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+
+            img {
+                width: 6vw;
+                height: 6vw;
+                border-radius: 5px;
+                margin: 0 10px;
+            }
+
+            .sort {
+                line-height: 6vw;
+                margin: 0 10px 0 0;
+                color: #bfbfbf;
+            }
+
+            .contentBox {
+                width: calc(29vw - 43.56px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .text,
+                .author {
+                    color: #333;
+                    margin: 2px 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    text-align: justify;
+
+                    .subtitle {
+                        color: #ababab;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .PalaceItem4 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .itemBox4 {
+            width: 48%;
+            flex-direction: row;
+            display: flex;
+            padding: 10px 0;
+            border: 1px solid #f7f7f7;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 0;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+
+            img {
+                width: 9vw;
+                height: 9vw;
+                border-radius: 5px;
+                margin: 0 10px;
+            }
+
+            .contentBox {
+                width: calc(26vw - 24.56px);
+                margin-left: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .text,
+                .author {
+                    color: #333;
+                    margin: 2px 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    text-align: justify;
+
+                    .subtitle {
+                        color: #ababab;
+                    }
+                }
+            }
+
+        }
+    }
+
 }

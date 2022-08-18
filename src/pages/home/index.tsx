@@ -29,7 +29,12 @@ class Home extends React.Component<reduxIProps, any> {
       <div>
         <Swiper />
         {/* 推荐 */}
-        <Palace />
+        <Palace styleType={4} />
+        <Palace styleType={2} />
+        <Palace styleType={1} />
+        <Palace styleType={2} />
+        <Palace styleType={3} />
+
       </div>
     );
   }
