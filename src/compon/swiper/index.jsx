@@ -104,7 +104,7 @@ class Slide extends React.PureComponent {
     this.setState({ slideClass });
   }
 
-  // 进度条数值控制 3秒跳转一次 1000SS/100SS / 3 = 3.3333
+  // 进度条数值控制 5秒跳转一次 1000SS/100SS / 5 = 2
   handleProgress = () => {
     let { percent, key, slideClass } = this.state
     if (percent >= 100) {
@@ -116,7 +116,7 @@ class Slide extends React.PureComponent {
       // 置空
       this.setState({ percent: 0 })
     } else {
-      percent += 3.3333
+      percent += 2
       this.setState({ percent })
     }
   }
