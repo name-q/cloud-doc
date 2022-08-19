@@ -48,7 +48,7 @@ class OverView extends React.Component<reduxIProps, any> {
             <HeaderOperate />
           </Header>
           <Layout>
-            <Sider>
+            <Sider style={{ overflowY: 'auto' }}>
               <AvatarAndNick />
               <Menu />
             </Sider>

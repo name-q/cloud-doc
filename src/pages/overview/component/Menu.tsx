@@ -12,13 +12,14 @@ import {
   EditOutlined,
   AuditOutlined,
   StarOutlined,
+  HeartOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
 import './Menu.less'
 
-// 源数据 key = router.path
-const items: MenuProps['items'] = [
+// 基础源数据
+const baseItems: MenuProps['items'] = [
   { label: '发现造极', key: '/', icon: <ExperimentOutlined /> },
   { label: '私人FM', key: '/pages/privateZJ', icon: <AimOutlined /> },
   { label: '极高', key: '/pages/extremelyHigh', icon: <TrophyOutlined /> },
@@ -42,12 +43,35 @@ const items: MenuProps['items'] = [
         label: '最近使用',
         key: '/pages/myZJ/recentlyUsed',
         icon: <FieldTimeOutlined />
-      },
-      {
-        label: '我的收藏',
-        key: '/pages/myZJ/myCollection',
-        icon: <StarOutlined />
       }
+    ],
+  },
+];
+
+// 创建的极合
+const createZJGroup: MenuProps['items'] = [
+  {
+    label: '创建的极合',
+    key: 'createZJGroup',
+    disabled: true,
+    children: [
+      {
+        label: '我喜欢的造极',
+        key: '/pages/createZJGroup/ilike',
+        icon: <HeartOutlined />
+      },
+    ],
+  },
+];
+
+// 收藏的极合
+const collectZJGroup: any = [
+  {
+    label: '收藏的极合',
+    key: 'collectZJGroup',
+    disabled: true,
+    children: [
+      
     ],
   },
 ];
@@ -60,17 +84,32 @@ const Menu: React.FC = () => {
     console.log('click ', e);
     setCurrent(e.key);
   };
-
   return (
     <div className='MenuLeft'>
       <AtMenu
         onClick={onClick}
         selectedKeys={[current]}
         openKeys={['myZJ']}
-        items={items}
+        items={baseItems}
         mode="inline"
         expandIcon={<p></p>}
       />
+      <AtMenu
+        onClick={onClick}
+        selectedKeys={[current]}
+        openKeys={['createZJGroup']}
+        items={createZJGroup}
+        mode="inline"
+        expandIcon={<p></p>}
+      />
+      {collectZJGroup[0].children.length && (<AtMenu
+        onClick={onClick}
+        selectedKeys={[current]}
+        openKeys={['collectZJGroup']}
+        items={collectZJGroup}
+        mode="inline"
+        expandIcon={<p></p>}
+      />)}
     </div>
   );
 }
