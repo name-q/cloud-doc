@@ -44,8 +44,8 @@ export default class SearchInput extends Component {
               : null
           }
           onChange={e => this.setState({ inputValue: e.target.value })}
-          onFocus={() => msg.emit('searchInfoModalComponent-visible', true)}
           onPressEnter={() => this.onEnter()}
+          onClick={() => { this.setState({ inputValue: '' }); msg.emit('searchInfoModalComponent-visible', true) }}
         />
       </>
     );

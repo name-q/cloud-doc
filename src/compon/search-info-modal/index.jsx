@@ -21,16 +21,16 @@ export default class SearchInfoModal extends PureComponent {
   }
 
   componentDidMount() {
-    msg.on('searchInfoModalComponent-visible', visible => this.setState({ visible }))
-    msg.on('searchInfoModalComponent-inputValue', inputValue => this.setState({ inputValue }))
+    msg.on('searchInfoModalComponent-visible', this.handleVisible)
+    msg.on('searchInfoModalComponent-inputValue', this.handleInputValue)
 
     // 监听点出组件
     document.addEventListener('mousedown', (e) => this.handleClickOutside(e), false);
   }
 
   componentWillUnmount() {
-    msg.off('searchInfoModalComponent-visible', visible => this.setState({ visible }))
-    msg.off('searchInfoModalComponent-inputValue', inputValue => this.setState({ inputValue }))
+    msg.off('searchInfoModalComponent-visible', this.handleVisible)
+    msg.off('searchInfoModalComponent-inputValue', this.handleInputValue)
 
     document.removeEventListener('mousedown', (e) => this.handleClickOutside(e), false);
   }
@@ -45,6 +45,7 @@ export default class SearchInfoModal extends PureComponent {
         ref={element => this.drawer = element}
       >
         <Drawer
+          autoFocus={false}
           className="searchInfoModalComponent"
           mask={false}
           closable={false}
@@ -57,6 +58,16 @@ export default class SearchInfoModal extends PureComponent {
         </Drawer>
       </center>
     )
+  }
+
+
+  handleVisible = visible => {
+    console.log("handleVisible = ", visible)
+    this.setState({ visible })
+  }
+  handleInputValue = inputValue => {
+    console.log("handleInputValue = ", inputValue)
+    this.setState({ inputValue })
   }
 
   handleClickOutside(e) {
