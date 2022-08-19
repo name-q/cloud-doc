@@ -62,11 +62,9 @@ export default class SearchInfoModal extends PureComponent {
 
 
   handleVisible = visible => {
-    console.log("handleVisible = ", visible)
     this.setState({ visible })
   }
   handleInputValue = inputValue => {
-    console.log("handleInputValue = ", inputValue)
     this.setState({ inputValue })
   }
 
