@@ -102,7 +102,7 @@ const Menu: React.FC = () => {
         mode="inline"
         expandIcon={<p></p>}
       />
-      {collectZJGroup[0].children.length && (<AtMenu
+      { !!collectZJGroup[0].children.length && (<AtMenu
         onClick={onClick}
         selectedKeys={[current]}
         openKeys={['collectZJGroup']}
