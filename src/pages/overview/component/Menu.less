@@ -1,0 +1,28 @@
+.MenuLeft {
+
+    // 父子导航统一缩进
+    li.ant-menu-item {
+        padding-left: 24px !important;
+    }
+
+    // 父子导航背景色统一 [常规,选中]
+    .ant-menu-sub.ant-menu-inline,
+    .ant-menu,
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+        background-color: #ededed;
+    }
+
+    // 隐藏选中的右侧 "|" 标识
+    .ant-menu-inline .ant-menu-item::after {
+        border-right: none;
+    }
+
+    // 鼠标永远为指针 [禁用,父子导航]
+    .ant-menu-item,
+    .ant-menu-submenu-title,
+    .ant-menu-item-disabled,
+    .ant-menu-submenu-disabled,
+    .ant-menu-submenu-disabled>.ant-menu-submenu-title {
+        cursor: default;
+    }
+}
