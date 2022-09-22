@@ -4,7 +4,13 @@ import React from 'react';
 
 import './Header-operate.less'
 import SearchInput from '@/compon/search-input';
-import { CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons';
+import TopTabs from '@/compon/top-tabs';
+import {
+  CloseCircleTwoTone,
+  MinusCircleTwoTone,
+  SettingOutlined,
+  MailOutlined,
+} from '@ant-design/icons';
 
 import { asyncSend } from '@/kit/ipc'
 class HeaderOperate extends React.Component<any, any> {
@@ -33,7 +39,12 @@ class HeaderOperate extends React.Component<any, any> {
         </div>
 
         <div className='rightArea'>
-          <SearchInput />
+          <TopTabs />
+          <div>
+            <SearchInput />
+            <MailOutlined style={{ marginLeft: 20 }} />
+            <SettingOutlined style={{ margin: '0 20px' }} />
+          </div>
         </div>
 
       </div>

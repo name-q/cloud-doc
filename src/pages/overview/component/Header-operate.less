@@ -7,7 +7,8 @@
     height: 100%;
     background-color: #f6f6f6;
 
-    .closeMinusButton, .closeMinusButtonX {
+    .closeMinusButton,
+    .closeMinusButtonX {
       width: 40px;
       height: 40px;
       margin-left: 10px;
@@ -20,19 +21,22 @@
       position: relative;
       top: -40px;
 
-      .close, .minus {
+      .close,
+      .minus {
         width: 14px;
         height: 14px;
         border-radius: 50%;
         background-color: #fc605c;
+
         &:hover {
           opacity: 0;
         }
       }
+
       .minus {
         background-color: #fdbc40;
       }
-      
+
     }
   }
 
@@ -40,6 +44,30 @@
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+
+    .card-container {
+      width: 50vw;
+    }
+
+    .ant-tabs-ink-bar.ant-tabs-ink-bar-animated,
+    .ant-tabs-nav-operations {
+      display: none !important;
+    }
+
+    .ant-tabs-tab,
+    .ant-tabs-tab.ant-tabs-tab-active {
+      border: none !important;
+      background: none !important;
+    }
+
+    .ant-tabs-nav {
+
+      margin: 2px 0 0 !important;
+      &::before {
+        display: none;
+      }
+    }
   }
-  
+
 }
