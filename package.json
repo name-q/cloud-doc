@@ -16,6 +16,7 @@
     "antd": "^4.22.6",
     "craco-less": "^1.20.0",
     "crypto-js": "^4.1.1",
+    "default-passive-events": "^2.0.0",
     "electron-is-dev": "^2.0.0",
     "immer": "^9.0.12",
     "immutable": "^4.1.0",
