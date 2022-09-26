@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { openRouters } from '../routers';
+import { openRouters, authRouters } from '../routers';
 import { fromJS } from 'immutable';
 import { isLogin } from './util';
 import noop from './noop'
 import { Spin } from 'antd';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
+import msg from './msg';
 
 export type Loader = () => Promise<any>;
 
@@ -22,7 +23,6 @@ export interface Props {
  * @param props 路由参数
  */
 export default memo(function AsyncRoute(props: any) {
-  console.log('路由跳转------>', props.path)
   const { load, handlePathMatched, ...rest } = props;
   return (
     <Route
@@ -47,6 +47,7 @@ export default memo(function AsyncRoute(props: any) {
             );
           } else {
             // 2.2.未登录,跳转登录页面
+            console.log('路由跳转------>', '/login')
             return (
               <Redirect
                 to={{ pathname: '/login', state: { from: props.location } }}
@@ -86,12 +87,24 @@ class AsyncLoader extends React.Component<any, any> {
 
   async componentDidMount() {
     const { load } = this.props;
-
+    console.log('路由跳转------>', this.props.match.path)
     const { handlePathMatched } = this.props;
     handlePathMatched(this.props.match.path);
     let Component: any = await load
     this.setState({
       Component: Component.default || Component
+    }, () => {
+      // 路由配置中的定制功能
+      // 1.HideLeftMenu -隐藏公共首页左侧菜单
+      let currentRouter = authRouters.filter(i => i.path === this.props.match.path)
+      if (currentRouter.length) {
+        let {
+          VisibleLeftMenu = true,
+          VisibleFooter = true,
+        } = currentRouter[0]
+        msg.emit('VisibleLeftMenu', VisibleLeftMenu)
+        msg.emit('VisibleFooter', VisibleFooter)
+      }
     })
   }
 

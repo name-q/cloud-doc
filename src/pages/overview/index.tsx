@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { routeWithSubRoutes } from '@/kit/index';
+import { msg, routeWithSubRoutes } from '@/kit/index';
 import { authRouters } from '@/routers/index';
 
 import './index.less'
@@ -29,18 +29,28 @@ class OverView extends React.Component<reduxIProps, any> {
     this.state = {
       // 当前路由path
       matchedPath: '',
+      VisibleLeftMenu: true,
+      VisibleFooter: true,
     };
   }
 
   componentDidMount() {
     this.props.actions.init()
+    msg.on('VisibleLeftMenu', this.showLeftMenu)
+    msg.on('VisibleFooter', this.showFooter)
   }
 
   componentWillUnmount() {
     this.props.actions.clean()
+    msg.off('VisibleLeftMenu', this.showLeftMenu)
+    msg.off('VisibleFooter', this.showFooter)
   }
 
   render() {
+    let {
+      VisibleLeftMenu,
+      VisibleFooter,
+    } = this.state
     return (
       <>
         <Layout className='overView'>
@@ -48,15 +58,19 @@ class OverView extends React.Component<reduxIProps, any> {
             <HeaderOperate />
           </Header>
           <Layout>
-            <Sider style={{ overflowY: 'auto' }}>
-              <AvatarAndNick />
-              <Menu />
-            </Sider>
+            {VisibleLeftMenu && (
+              <Sider style={{ overflowY: 'auto' }}>
+                <AvatarAndNick />
+                <Menu />
+              </Sider>
+            )}
             <Content style={{ overflowY: 'auto' }}>
               {routeWithSubRoutes(authRouters, this.handlePathMatched)}
             </Content>
           </Layout>
-          <Footer>Footer</Footer>
+          {VisibleFooter && (
+            <Footer>Footer</Footer>
+          )}
         </Layout>
 
         {/* 公用组件 -msg-通信 */}
@@ -64,6 +78,12 @@ class OverView extends React.Component<reduxIProps, any> {
       </>
     );
   }
+
+  // 显影左侧菜单
+  showLeftMenu = VisibleLeftMenu => this.setState({ VisibleLeftMenu })
+
+  // 显影底部操作栏
+  showFooter = VisibleFooter => this.setState({ VisibleFooter })
 
   // 保存跳转后的路由路径
   handlePathMatched = matchedPath => {

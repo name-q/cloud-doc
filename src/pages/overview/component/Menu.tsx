@@ -11,17 +11,18 @@ import {
   FieldTimeOutlined,
   EditOutlined,
   AuditOutlined,
-  StarOutlined,
   HeartOutlined,
+  DeploymentUnitOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-
+import {history} from '@/kit/index'
 import './Menu.less'
 
 // 基础源数据
 const baseItems: MenuProps['items'] = [
   { label: '发现造极', key: '/', icon: <ExperimentOutlined /> },
   { label: '私人FM', key: '/pages/privateZJ', icon: <AimOutlined /> },
+  { label: '创造极', key: '/pages/createZJ', icon: <DeploymentUnitOutlined /> },
   { label: '极高', key: '/pages/extremelyHigh', icon: <TrophyOutlined /> },
   { label: '广场', key: '/pages/square', icon: <CompassOutlined /> },
   {
@@ -83,6 +84,7 @@ const Menu: React.FC = () => {
   const onClick: MenuProps['onClick'] = e => {
     console.log('click ', e);
     setCurrent(e.key);
+    history.push(e.key)
   };
   return (
     <div className='MenuLeft'>
