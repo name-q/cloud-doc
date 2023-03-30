@@ -3,8 +3,6 @@ import { Dispatch } from '@/redux/types';
 import { getActionProxy } from '@/redux/action-util';
 import Action from './action';
 
-import { message } from 'antd';
-
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
   const actions = {
