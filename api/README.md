@@ -1,33 +1,23 @@
-# zao-ji
+# zao-ji services
 
-operation oss obs cos
+## install mongoDB
 
-## QuickStart
+[Mac OSX 平台安装 MongoDB](https://www.runoob.com/mongodb/mongodb-osx-install.html)
 
-<!-- add docs here for user -->
 
-see [egg docs][egg] for more detail.
+### 创建超级管理员
 
-### Development
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+账号密码均为admin
+```shell
+use admin
+db.createUser({user:'admin',pwd:'admin',roles:['userAdminAnyDatabase']})
 ```
 
-### Deploy
+### 创建 cloud-docx 数据库
 
-```bash
-$ npm start
-$ npm stop
+```shell
+use cloud-docx
+show dbs # 此时没有数据不可见此数据库
+exit
 ```
 
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
