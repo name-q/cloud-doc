@@ -59,6 +59,8 @@ module.exports = appInfo => {
     PRIVATE_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_private_key.pem'), 'ascii'),
     // RSA解密公钥
     PUBLIC_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_public_key.pem'), 'ascii'),
+    // OpenAI密钥
+    OPENAI_KEY: fs.readFileSync(path.join(__dirname, './csr/open_ai_key.txt'), 'ascii'),
 
   };
 
