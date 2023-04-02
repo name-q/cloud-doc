@@ -11,4 +11,7 @@ module.exports = app => {
   // 用户相关
   require('./routers/user')(app, whoami)
 
+  // ChatGPT相关
+  require('./routers/chatgpt')(app, whoami)
+
 };
