@@ -4,7 +4,7 @@ const Controller = require("egg").Controller;
 class chatGPTPostController extends Controller {
   // 创建新的ChatGPT提问
   async question() {
-    const { ctx, config } = this;
+    const { ctx } = this;
 
     try {
       let { _id } = ctx.data;

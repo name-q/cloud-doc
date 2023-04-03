@@ -2,7 +2,7 @@ module.exports = (app) => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   return mongoose.model(
-    "ChatGPTMessage",
+    "Chatgpt",
     new Schema({
       // 对话创建时间
       createTime: {
@@ -24,7 +24,7 @@ module.exports = (app) => {
         type: String,
         required: true,
         trim: true,
-        maxlength: 10,
+        maxlength: 20,
       },
       // 对话更新时间
       updateTime: {
