@@ -81,28 +81,24 @@ class ChatGPTService extends Service {
    */
   async linkMessage(content, messageId) {
     let { ctx } = this;
-    try {
-      if (
-        !content ||
-        Object.prototype.toString.call(content) !== "[object String]" ||
-        !messageId ||
-        Object.prototype.toString.call(messageId) !== "[object String]"
-      )
-        throw "参数错误";
-      let result = await ctx.service.mongo.findOne("Chatgpt", {
-        _id: messageId,
-      });
-      if (!result) throw "对话已失效";
-      return [
-        ...result.message_history,
-        {
-          role: "user",
-          content: content,
-        },
-      ];
-    } catch (error) {
-      ctx.logger.error("findMessage error", error);
-    }
+    if (
+      !content ||
+      Object.prototype.toString.call(content) !== "[object String]" ||
+      !messageId ||
+      Object.prototype.toString.call(messageId) !== "[object String]"
+    )
+      throw "参数错误";
+    let result = await ctx.service.mongo.findOne("Chatgpt", {
+      _id: messageId,
+    });
+    if (!result) throw "对话已失效";
+    return [
+      ...result.message_history,
+      {
+        role: "user",
+        content: content,
+      },
+    ];
   }
 
   // 发起继续对话
@@ -121,6 +117,40 @@ class ChatGPTService extends Service {
     } catch (error) {
       ctx.logger.error("callAgain error:", error);
       throw "操作失败";
+    }
+  }
+
+  /**
+   * 更新chatGPT最新反馈
+   * @param {*} messages 历史消息集合
+   * @param {*} newMessage chatGPT发来的最新消息
+   * @param {*} messageId 定位消息的id
+   * @param {*} user_id 用户_id
+   */
+  async updateMessage(messages, newMessage, messageId, user_id) {
+    let { ctx, config } = this;
+    try {
+      let updateTime = Date.now();
+      let message_history = [...messages, newMessage].splice(
+        -config.QA_RECORD * 2
+      );
+      await ctx.service.mongo.updateOne(
+        "Chatgpt",
+        {
+          _id: messageId,
+          user_id,
+        },
+        {
+          message_history,
+          updateTime,
+        }
+      );
+      return {
+        newMessage,
+        updateTime,
+      };
+    } catch (error) {
+      ctx.logger.error("updateMessage error:", error);
     }
   }
 }

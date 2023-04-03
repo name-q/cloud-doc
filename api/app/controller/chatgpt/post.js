@@ -36,8 +36,13 @@ class chatGPTPostController extends Controller {
       // 发起继续对话
       let chatGPT_result = await ctx.service.chatgpt.callAgain(messages);
       // 更新chatGPT最新反馈
-
-      ctx.successbody("result");
+      let result = await ctx.service.chatgpt.updateMessage(
+        messages,
+        chatGPT_result.choices[0].message,
+        messageId,
+        _id
+      );
+      ctx.successbody(result);
     } catch (error) {
       ctx.errbody(error);
     }

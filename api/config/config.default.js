@@ -61,7 +61,8 @@ module.exports = appInfo => {
     PUBLIC_KEY: fs.readFileSync(path.join(__dirname, './csr/rsa_public_key.pem'), 'ascii'),
     // OpenAI密钥
     OPENAI_KEY: fs.readFileSync(path.join(__dirname, './csr/open_ai_key.txt'), 'ascii'),
-
+    // 问答记录层数 * ChatGPT是更具回答的上下文生成最新的回答，记录层数过高会导致mongo和带宽的压力
+    QA_RECORD: 10,
   };
 
   return {

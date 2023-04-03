@@ -8,9 +8,9 @@ module.exports = (app) => {
       createTime: {
         type: Number,
       },
-      // 用户objectID
+      // 用户_id
       user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
         trim: true,
       },
