@@ -4,11 +4,10 @@ module.exports = (app) => {
   return mongoose.model(
     "ChatGPTMessage",
     new Schema({
-      // 对话id 也是对话的创建时间
-      message_id: {
+      // 对话创建时间
+      createTime: {
         type: Number,
-        unique: true,
-        default: new Date().getTime(),
+        default: Date.now(),
       },
       // 用户objectID
       user_id: {
@@ -31,7 +30,7 @@ module.exports = (app) => {
       // 对话更新时间
       updateTime: {
         type: Number,
-        default: new Date().getTime(),
+        default: Date.now(),
         validate: (d) => {
           return d >= 0;
         },

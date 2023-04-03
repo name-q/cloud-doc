@@ -11,9 +11,13 @@ class chatGPTPostController extends Controller {
       let { question } = ctx.request.body;
       // 反馈回答
       let chatGPT_result = await ctx.service.chatgpt.putQuestions(question);
-      ctx.successbody(chatGPT_result);
-
       // 保存到历史消息
+      let result = await ctx.service.chatgpt.saveMessage(
+        _id,
+        chatGPT_result.choices[0].message,
+        question
+      );
+      ctx.successbody(result);
     } catch (error) {
       ctx.errbody(error);
     }
