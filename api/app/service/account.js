@@ -16,7 +16,7 @@ class accountService extends Service {
 
             try {
                 // 载入数据库
-                result = await ctx.service.mongo.save('Userinfo', { mail, password, nick })
+                result = await ctx.service.mongo.save('Userinfo', { mail, password, nick, registerTime: Date.now() })
                 return result?._id ? 'success' : 'error'
             } catch {
                 ctx.logger.error('user register params error', { mail, password, nick })

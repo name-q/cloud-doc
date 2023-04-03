@@ -31,7 +31,6 @@ module.exports = app => {
             // 注册时间
             registerTime: {
                 type: Number,
-                default: new Date().getTime(),
             },
             // 最后登入时间
             lastTime: {
