@@ -10,7 +10,10 @@ module.exports = (app, whoami) => {
 
     // ping 校验QWT是否过期 如登入状态正常则返回QWT解密后的数据
     post('/api/chatgpt/question', tokencheck, chatgpt.post.question)
-    // 
+    // 继续旧的对话
     post('/api/chatgpt/linkchat', tokencheck, chatgpt.post.linkChat)
+
+    // 聊天列表
+    get('/api/chatgpt/chatlist', tokencheck, chatgpt.get.chatList)
 
 }
