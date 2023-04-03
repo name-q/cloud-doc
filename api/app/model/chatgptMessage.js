@@ -7,7 +7,6 @@ module.exports = (app) => {
       // 对话创建时间
       createTime: {
         type: Number,
-        default: Date.now(),
       },
       // 用户objectID
       user_id: {
@@ -30,10 +29,6 @@ module.exports = (app) => {
       // 对话更新时间
       updateTime: {
         type: Number,
-        default: Date.now(),
-        validate: (d) => {
-          return d >= 0;
-        },
       },
     }),
     "chatgpt_message"
