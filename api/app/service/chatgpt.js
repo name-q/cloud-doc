@@ -73,5 +73,37 @@ class ChatGPTService extends Service {
       ctx.logger.error("saveMessage error:", error);
     }
   }
+
+  /**
+   * 查询上一次的对话并拼接
+   * @param {*} content 新的内容
+   * @param {*} messageId 上一次的对话id
+   * @returns 
+   */
+  async linkMessage(content, messageId) {
+    let { ctx } = this;
+    try {
+      if (
+        !content ||
+        Object.prototype.toString.call(content) !== "[object String]" ||
+        !messageId ||
+        Object.prototype.toString.call(messageId) !== "[object String]"
+      )
+        throw "参数错误";
+      let result = await ctx.service.mongo.findOne("Chatgpt", {
+        _id: messageId,
+      });
+      if (!result) throw "对话已失效";
+      return [
+        ...result.message_history,
+        {
+          role: "user",
+          content: content,
+        },
+      ];
+    } catch (error) {
+      ctx.logger.error("findMessage error", error);
+    }
+  }
 }
 module.exports = ChatGPTService;

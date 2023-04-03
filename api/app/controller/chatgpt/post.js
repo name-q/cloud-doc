@@ -22,6 +22,26 @@ class chatGPTPostController extends Controller {
       ctx.errbody(error);
     }
   }
+
+  // 继续旧的对话
+  async linkChat() {
+    const { ctx } = this;
+
+    try {
+      let { _id } = ctx.data;
+      let { question, messageId } = ctx.request.body;
+
+      // 查询上一次的对话并拼接
+      let message = await ctx.service.chatgpt.linkMessage(question, messageId);
+      // 发起继续对话
+      
+      // 更新chatGPT最新反馈
+
+      ctx.successbody("result");
+    } catch (error) {
+      ctx.errbody(error);
+    }
+  }
 }
 
 module.exports = chatGPTPostController;
