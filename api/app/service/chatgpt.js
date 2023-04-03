@@ -24,7 +24,6 @@ class ChatGPTService extends Service {
         },
       ];
       const result = await openai.createChatCompletion({
-        // 配置侧
         model,
         messages,
       });
@@ -78,7 +77,7 @@ class ChatGPTService extends Service {
    * 查询上一次的对话并拼接
    * @param {*} content 新的内容
    * @param {*} messageId 上一次的对话id
-   * @returns 
+   * @returns
    */
   async linkMessage(content, messageId) {
     let { ctx } = this;
@@ -103,6 +102,25 @@ class ChatGPTService extends Service {
       ];
     } catch (error) {
       ctx.logger.error("findMessage error", error);
+    }
+  }
+
+  // 发起继续对话
+  async callAgain(messages, { model } = { model: "gpt-3.5-turbo-0301" }) {
+    let { ctx, config } = this;
+    try {
+      const configuration = new Configuration({
+        apiKey: config.OPENAI_KEY,
+      });
+      const openai = new OpenAIApi(configuration);
+      const result = await openai.createChatCompletion({
+        model,
+        messages,
+      });
+      return result.data;
+    } catch (error) {
+      ctx.logger.error("callAgain error:", error);
+      throw "操作失败";
     }
   }
 }

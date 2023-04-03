@@ -32,9 +32,9 @@ class chatGPTPostController extends Controller {
       let { question, messageId } = ctx.request.body;
 
       // 查询上一次的对话并拼接
-      let message = await ctx.service.chatgpt.linkMessage(question, messageId);
+      let messages = await ctx.service.chatgpt.linkMessage(question, messageId);
       // 发起继续对话
-      
+      let chatGPT_result = await ctx.service.chatgpt.callAgain(messages);
       // 更新chatGPT最新反馈
 
       ctx.successbody("result");
