@@ -153,5 +153,28 @@ class ChatGPTService extends Service {
       ctx.logger.error("updateMessage error:", error);
     }
   }
+
+  // 获取聊天列表分页数据
+  async chatListPagination(pageNum, pageSize, user_id) {
+    let { ctx } = this;
+    try {
+      pageNum = Number(pageNum);
+      pageSize = Number(pageSize);
+      if (isNaN(pageNum) || isNaN(pageSize)) throw "参数错误";
+      this.app.redis.get;
+      let result = await ctx.service.mongo.pagination(
+        "Chatgpt",
+        pageSize,
+        pageNum,
+        { user_id },
+        { updateTime: 1 },
+        "_id title"
+      );
+      return result;
+    } catch (error) {
+      ctx.logger.error("chatListPagination error:", error);
+      throw "操作失败";
+    }
+  }
 }
 module.exports = ChatGPTService;

@@ -9,7 +9,12 @@ class chatGPTGetController extends Controller {
       let { _id } = ctx.data;
       let { pageNum, pageSize } = ctx.query;
       // TODO
-      ctx.successbody("1");
+      let result = await ctx.service.chatgpt.chatListPagination(
+        pageNum,
+        pageSize,
+        _id
+      );
+      ctx.successbody(result);
     } catch (error) {
       ctx.errbody(error);
     }
