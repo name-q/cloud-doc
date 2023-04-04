@@ -13,7 +13,9 @@ module.exports = (app, whoami) => {
     // 继续旧的对话
     post('/api/chatgpt/linkchat', tokencheck, chatgpt.post.linkChat)
 
-    // 聊天列表
+    // 获取聊天列表
     get('/api/chatgpt/chatlist', tokencheck, chatgpt.get.chatList)
+    // 获取对话详情
+    get('/api/chatgpt/dialogueDetails', tokencheck, chatgpt.get.dialogueDetails)
 
 }

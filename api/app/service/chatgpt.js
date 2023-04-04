@@ -81,24 +81,28 @@ class ChatGPTService extends Service {
    */
   async linkMessage(content, messageId) {
     let { ctx } = this;
-    if (
-      !content ||
-      Object.prototype.toString.call(content) !== "[object String]" ||
-      !messageId ||
-      Object.prototype.toString.call(messageId) !== "[object String]"
-    )
-      throw "参数错误";
-    let result = await ctx.service.mongo.findOne("Chatgpt", {
-      _id: messageId,
-    });
-    if (!result) throw "对话已失效";
-    return [
-      ...result.message_history,
-      {
-        role: "user",
-        content: content,
-      },
-    ];
+    try {
+      if (
+        !content ||
+        Object.prototype.toString.call(content) !== "[object String]" ||
+        !messageId ||
+        Object.prototype.toString.call(messageId) !== "[object String]"
+      )
+        throw "参数错误";
+      let result = await ctx.service.mongo.findOne("Chatgpt", {
+        _id: messageId,
+      });
+      if (!result) throw "对话已失效";
+      return [
+        ...result.message_history,
+        {
+          role: "user",
+          content: content,
+        },
+      ];
+    } catch (error) {
+      throw "对话已失效";
+    }
   }
 
   // 发起继续对话
@@ -174,6 +178,33 @@ class ChatGPTService extends Service {
     } catch (error) {
       ctx.logger.error("chatListPagination error:", error);
       throw "操作失败";
+    }
+  }
+
+  // 获取对话详情
+  async getMessage(messageId, user_id) {
+    let { ctx } = this;
+    try {
+      if (
+        !messageId ||
+        Object.prototype.toString.call(messageId) !== "[object String]"
+      )
+        throw "参数错误";
+
+      let result = await ctx.service.mongo.findOne(
+        "Chatgpt",
+        {
+          _id: messageId,
+          user_id,
+        },
+        "message_history createTime updateTime _id"
+      );
+      if (!result) throw "对话已失效";
+      return result;
+    } catch (error) {
+      // 此处为参数乱传情况 直接抛错不要记录
+      // ctx.logger.error("getMessage error:", error);
+      throw "对话已失效";
     }
   }
 }

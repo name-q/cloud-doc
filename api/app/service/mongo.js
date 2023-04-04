@@ -2,14 +2,16 @@
 const Service = require("egg").Service;
 
 class MongoService extends Service {
-  /*
+ 
+  /**
    * 查询一条数据
-   *-> Schema
-   *-> obj 查询条件
-   *=> {...} || null
+   * @param {*} Schema 集合名
+   * @param {*} obj 查询条件
+   * @param {?} select 保留字段 不传默认全部返回 传则以空格区分的字符串
+   * @returns 
    */
-  findOne(Schema, obj) {
-    return this.ctx.model[Schema].findOne(obj);
+  findOne(Schema, obj, select) {
+    return this.ctx.model[Schema].findOne(obj).select(select);
   }
 
   /*

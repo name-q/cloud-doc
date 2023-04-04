@@ -8,12 +8,24 @@ class chatGPTGetController extends Controller {
     try {
       let { _id } = ctx.data;
       let { pageNum, pageSize } = ctx.query;
-      // TODO
       let result = await ctx.service.chatgpt.chatListPagination(
         pageNum,
         pageSize,
         _id
       );
+      ctx.successbody(result);
+    } catch (error) {
+      ctx.errbody(error);
+    }
+  }
+
+  // 获取对话详情
+  async dialogueDetails() {
+    const { ctx } = this;
+    try {
+      let { _id } = ctx.data;
+      let { messageId } = ctx.query;
+      let result = await ctx.service.chatgpt.getMessage(messageId, _id);
       ctx.successbody(result);
     } catch (error) {
       ctx.errbody(error);
