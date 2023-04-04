@@ -1,8 +1,8 @@
-export const BASE = 'login_';
+export const BASE = 'overView_';
 
 export enum Command {
   //通用修改数据方法
-  commonChange = 'login_commonChange',
-  init = 'login_INIT',
-  clean = 'login_CLEAN'
+  commonChange = 'overView_commonChange',
+  init = 'overView_INIT',
+  clean = 'overView_CLEAN'
 }

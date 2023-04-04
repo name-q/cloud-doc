@@ -31,7 +31,7 @@ export default class SearchInput extends Component {
           size="small"
           placeholder="搜索"
           value={inputValue}
-          prefix={<SearchOutlined style={{ color: '#575757' }} />}
+          prefix={<SearchOutlined style={{ color: '#999' }} />}
           suffix={
             inputValue
               ? <CloseCircleOutlined

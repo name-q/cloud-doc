@@ -1,8 +1,6 @@
 import React from 'react';
 
 import './index.less'
-import Swiper from '@/compon/swiper';
-import Palace from '@/compon/palace';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -27,13 +25,6 @@ class Home extends React.Component<reduxIProps, any> {
   render() {
     return (
       <div>
-        <Swiper />
-        {/* 推荐 */}
-        <Palace styleType={4} />
-        <Palace styleType={2} />
-        <Palace styleType={1} />
-        <Palace styleType={2} />
-        <Palace styleType={3} />
 
       </div>
     );

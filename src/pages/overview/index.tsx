@@ -8,8 +8,6 @@ import { Layout } from 'antd';
 
 import HeaderOperate from './component/Header-operate'
 import SearchInfoModal from '@/compon/search-info-modal';
-import AvatarAndNick from './component/Avatar-and-nick';
-import Menu from './component/Menu';
 
 import { connect } from 'react-redux'
 import { registerReducer } from '@/redux/store';
@@ -60,8 +58,6 @@ class OverView extends React.Component<reduxIProps, any> {
           <Layout>
             {VisibleLeftMenu && (
               <Sider style={{ overflowY: 'auto' }}>
-                <AvatarAndNick />
-                <Menu />
               </Sider>
             )}
             <Content style={{ overflowY: 'auto' }}>
@@ -69,7 +65,7 @@ class OverView extends React.Component<reduxIProps, any> {
             </Content>
           </Layout>
           {VisibleFooter && (
-            <Footer>Footer</Footer>
+            <Footer></Footer>
           )}
         </Layout>
 
