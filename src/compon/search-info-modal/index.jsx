@@ -46,11 +46,11 @@ export default class SearchInfoModal extends PureComponent {
       >
         <Drawer
           autoFocus={false}
-          className="searchInfoModalComponent"
+          rootClassName="searchInfoModalComponent"
           mask={false}
           closable={false}
           getContainer={"center"}
-          visible={visible || inputValue}
+          open={visible || inputValue}
           onClose={this.hideComponent}
         >
           <SearchHistory />

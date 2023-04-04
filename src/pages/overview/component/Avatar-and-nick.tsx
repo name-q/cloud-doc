@@ -48,8 +48,8 @@ class AvatarAndNick extends React.Component<reduxIProps, any> {
           placement="right"
           trigger="click"
           // visible={true}
-          visible={visible}
-          onVisibleChange={this.handleVisibleChange}
+          open={visible}
+          onOpenChange={this.handleVisibleChange}
         >
           <div className='nickBox'>
             <p>1111111111</p>
