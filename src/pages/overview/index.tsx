@@ -9,6 +9,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 
 import HeaderOperate from "./component/Header-operate";
 import SearchInfoModal from "@/compon/search-info-modal";
+import SearchFooter from "./component/SearchFooter";
 
 import { connect } from "react-redux";
 import { registerReducer } from "@/redux/store";
@@ -63,7 +64,11 @@ class OverView extends React.Component<reduxIProps, any> {
               {routeWithSubRoutes(authRouters, this.handlePathMatched)}
             </Content>
           </Layout>
-          {VisibleFooter && <Footer></Footer>}
+          {VisibleFooter && (
+            <Footer>
+              <SearchFooter />
+            </Footer>
+          )}
         </Layout>
 
         {/* 公用组件 -msg-通信 */}

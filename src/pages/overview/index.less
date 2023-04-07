@@ -18,6 +18,26 @@
     border-top: 1px solid #ededed;
     padding: 0;
     z-index: 1000;
+    transition: all 0.3s ease-in-out;
+
+    .ant-input-suffix {
+      width: 99%;
+      position: absolute;
+      top: -11.333px;
+      opacity: 0.8;
+      display: none;
+    }
+    &:hover {
+      height: 200px;
+      z-index: 99999;
+      .ant-input-suffix {
+        width: 99%;
+        position: absolute;
+        top: -11.333px;
+        opacity: 0.8;
+        display: block;
+      }
+    }
   }
   .left {
     padding: 2px;
