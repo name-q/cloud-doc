@@ -1,11 +1,11 @@
-import { Command } from '../constant';
-import { Dispatch } from '@/redux/types';
-import { IAllReducerProps } from '../types';
-import { getReducerData } from '@/redux/store';
-import { extraPathsValue } from '@/redux/util';
+import { Command } from "../constant";
+import { Dispatch } from "@/redux/types";
+import { IAllReducerProps } from "../types";
+import { getReducerData } from "@/redux/store";
+import { extraPathsValue } from "@/redux/util";
 
-import { Fetch } from '@/kit/index'
-import { message } from 'antd';
+import { Fetch } from "@/kit/index";
+import { message } from "antd";
 
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
@@ -17,16 +17,22 @@ export default (dispatch: Dispatch) => {
       });
     },
 
-    // 获取用户信息
-    async getUserInfo() {
-      let { result } = await Fetch('/api/getUserInfo',{noCache:false})
-      if (result.code !== 1) message.error(result)
-
-      message.success('获取用户信息成功')
-      
-    }
-
-
+    async getChatList(pageNum) {
+      try {
+        let { result } = await Fetch(
+          `/api/chatgpt/chatlist?pageNum=${pageNum}&pageSize=20`,
+          {
+            noCache: true,
+          }
+        );
+        if (result.code) {
+          return result.data;
+        }
+        return [];
+      } catch (error) {
+        return [];
+      }
+    },
   };
   return action;
 };
@@ -34,6 +40,6 @@ export default (dispatch: Dispatch) => {
 // eslint-disable-next-line
 function getData(): IAllReducerProps {
   return {
-    main: getReducerData('overviewMain'),
+    main: getReducerData("overviewMain"),
   };
 }

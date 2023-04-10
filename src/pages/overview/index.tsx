@@ -10,6 +10,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import HeaderOperate from "./component/Header-operate";
 import SearchInfoModal from "@/compon/search-info-modal";
 import SearchFooter from "./component/SearchFooter";
+import ScrollPagination from "./component/ScrollPagination";
 
 import { connect } from "react-redux";
 import { registerReducer } from "@/redux/store";
@@ -58,6 +59,7 @@ class OverView extends React.Component<reduxIProps, any> {
                 <Button icon={<PlusCircleOutlined />} block size="large">
                   新的对话
                 </Button>
+                <ScrollPagination />
               </Sider>
             )}
             <Content style={{ overflowY: "auto" }}>

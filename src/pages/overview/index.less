@@ -41,5 +41,28 @@
   }
   .left {
     padding: 2px;
+    .titleBox {
+      padding: 10px;
+      transition: all 0.3s ease-in-out;
+      .titleItem {
+        margin: 10px 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+        line-height: 26px;
+        color: #333;
+      }
+      &:hover {
+        background-color: #fff;
+        .titleItem {
+          color: #f56614;
+          display: block;
+        }
+      }
+    }
   }
 }

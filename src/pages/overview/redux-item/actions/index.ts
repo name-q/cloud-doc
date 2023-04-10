@@ -19,7 +19,7 @@ export default (dispatch: Dispatch) => {
       let { result } = await Fetch('/api/ping', {
         noCache: true
       })
-      if (result.code === 1) {
+      if (result.code) {
         let { data: { mail, nick, _id } } = result
         dispatch({
           type: Command.init,
@@ -29,9 +29,8 @@ export default (dispatch: Dispatch) => {
             }
           },
         })
-        actions.action.getUserInfo()
         // 改变窗口大小
-        asyncSend('changeWindowsSize', '1000,670')
+        // asyncSend('changeWindowsSize', '1000,670')
       } else {
         message.error('请重新登入')
         removeStorageAll()
