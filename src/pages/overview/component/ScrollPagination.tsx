@@ -62,8 +62,7 @@ const ScrollPagination: React.FC<reduxIProps> = (props) => {
         {data.map((item) => (
           <div className="titleBox">
             <div key={item._id} className="titleItem">
-              {item.title}
-              {item.title}
+              {item.title}...
             </div>
           </div>
         ))}

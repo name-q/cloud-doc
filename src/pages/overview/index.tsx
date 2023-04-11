@@ -11,6 +11,7 @@ import HeaderOperate from "./component/Header-operate";
 import SearchInfoModal from "@/compon/search-info-modal";
 import SearchFooter from "./component/SearchFooter";
 import ScrollPagination from "./component/ScrollPagination";
+import ChatContent from "./component/chatContent";
 
 import { connect } from "react-redux";
 import { registerReducer } from "@/redux/store";
@@ -63,7 +64,8 @@ class OverView extends React.Component<reduxIProps, any> {
               </Sider>
             )}
             <Content style={{ overflowY: "auto" }}>
-              {routeWithSubRoutes(authRouters, this.handlePathMatched)}
+              {/* {routeWithSubRoutes(authRouters, this.handlePathMatched)} */}
+              <ChatContent />
             </Content>
           </Layout>
           {VisibleFooter && (
