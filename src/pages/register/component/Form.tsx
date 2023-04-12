@@ -10,12 +10,9 @@ import config from '@/config/index';
 import * as _ from 'lodash';
 
 import { connect } from 'react-redux'
-import { registerReducer } from '@/redux/store';
-import registerMain from '../redux-item/reducers/main';
 import { store2Props } from '../redux-item/selectors';
 import actions from '../redux-item/actions';
 import { reduxIProps } from '../redux-item/types'
-registerReducer({ registerMain });
 
 const FormItem = Form.Item
 

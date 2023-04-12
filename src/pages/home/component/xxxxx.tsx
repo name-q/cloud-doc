@@ -3,12 +3,12 @@
 import React from 'react';
 
 import { connect } from 'react-redux'
-import { registerReducer } from '@/redux/store';
-import homeMain from '../redux-item/reducers/main';
+// import { registerReducer } from '@/redux/store';
+// import homeMain from '../redux-item/reducers/main';
 import { store2Props } from '../redux-item/selectors';
 import actions from '../redux-item/actions';
 import { reduxIProps } from '../redux-item/types'
-registerReducer({ homeMain });
+// registerReducer({ homeMain });
 
 class XXXXX extends React.Component<reduxIProps, any> {
   constructor(props) {
