@@ -1,7 +1,6 @@
 import React from "react";
 
-import { msg, routeWithSubRoutes } from "@/kit/index";
-import { authRouters } from "@/routers/index";
+import { msg } from "@/kit/index";
 
 import "./index.less";
 import { Layout, Button } from "antd";
@@ -57,7 +56,17 @@ class OverView extends React.Component<reduxIProps, any> {
           <Layout>
             {VisibleLeftMenu && (
               <Sider style={{ overflowY: "auto" }} className="left">
-                <Button icon={<PlusCircleOutlined />} block size="large">
+                <Button
+                  icon={<PlusCircleOutlined />}
+                  block
+                  size="large"
+                  onClick={() => {
+                    this.props.actions.action.commonChange(
+                      "main.selectedId",
+                      ""
+                    );
+                  }}
+                >
                   新的对话
                 </Button>
                 <ScrollPagination />

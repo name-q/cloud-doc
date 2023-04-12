@@ -1,10 +1,11 @@
-import Actions from './actions';
+import Actions from "./actions";
 
 export interface IMainReducer {
   isReady: boolean;
-  mail:string,
-  nick:string,
-  _id:string,
+  mail: string;
+  nick: string;
+  _id: string;
+  selectedId: string;
 }
 
 export type ActionType = ReturnType<typeof Actions>;

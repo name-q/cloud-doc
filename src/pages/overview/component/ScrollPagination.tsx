@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { store2Props } from "../redux-item/selectors";
 import actions from "../redux-item/actions";
 import { reduxIProps } from "../redux-item/types";
+import { registerReducer } from "@/redux/store";
+import overviewMain from "../redux-item/reducers/main";
 
 import { Spin } from "antd";
 import { SketchCircleFilled } from "@ant-design/icons";
@@ -12,14 +14,17 @@ import { throttle } from "lodash";
 
 const antIcon = <SketchCircleFilled style={{ fontSize: 36 }} spin />;
 
+registerReducer({ overviewMain });
+
 const ScrollPagination: React.FC<reduxIProps> = (props) => {
   const [page, setPage] = useState(1); // 当前页码
   const [data, setData] = useState([]); // 存放数据的数组
   const [spinning, setSpinning] = useState(true); // 加载中
   let {
     actions: {
-      action: { getChatList },
+      action: { getChatList, commonChange },
     },
+    main,
   } = props;
   useEffect(() => {
     // 当页面加载时获取第一页的数据
@@ -60,7 +65,14 @@ const ScrollPagination: React.FC<reduxIProps> = (props) => {
         }}
       >
         {data.map((item) => (
-          <div className="titleBox">
+          <div
+            key={item._id}
+            className="titleBox"
+            onClick={() => {
+              if (main.selectedId === item._id) return;
+              commonChange("main.selectedId", item._id);
+            }}
+          >
             <div key={item._id} className="titleItem">
               {item.title}...
             </div>

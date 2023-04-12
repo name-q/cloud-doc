@@ -5,7 +5,6 @@ import { getReducerData } from "@/redux/store";
 import { extraPathsValue } from "@/redux/util";
 
 import { Fetch } from "@/kit/index";
-import { message } from "antd";
 
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
