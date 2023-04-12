@@ -8,7 +8,7 @@ import { message } from 'antd';
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
   const actions = {
-    action: getActionProxy(Action)(dispatch),
+    action: getActionProxy<typeof Action>(Action)(dispatch),
 
     /**
      * 初始化数据
