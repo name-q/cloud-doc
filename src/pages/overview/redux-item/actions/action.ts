@@ -32,6 +32,21 @@ export default (dispatch: Dispatch) => {
         return [];
       }
     },
+
+    async selectedChat(messageId) {
+      action.commonChange("main.selectedId", messageId);
+      // 获取聊天内容
+      let { result } = await Fetch(
+        `/api/chatgpt/dialogueDetails?messageId=${messageId}`,
+        {
+          noCache: true,
+        }
+      );
+      console.log(result);
+
+      if (result.code) {
+      }
+    },
   };
   return action;
 };

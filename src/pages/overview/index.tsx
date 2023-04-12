@@ -13,14 +13,15 @@ import ScrollPagination from "./component/ScrollPagination";
 import ChatContent from "./component/chatContent";
 
 import { connect } from "react-redux";
-import { registerReducer } from "@/redux/store";
-import overviewMain from "./redux-item/reducers/main";
 import { store2Props } from "./redux-item/selectors";
 import actions from "./redux-item/actions";
 import { reduxIProps } from "./redux-item/types";
-registerReducer({ overviewMain });
+import { registerReducer } from "@/redux/store";
+import overviewMain from "./redux-item/reducers/main";
 
 const { Header, Footer, Sider, Content } = Layout;
+
+registerReducer({ overviewMain });
 
 class OverView extends React.Component<reduxIProps, any> {
   constructor(props) {
@@ -35,8 +36,8 @@ class OverView extends React.Component<reduxIProps, any> {
 
   componentDidMount() {
     this.props.actions.init();
-    msg.on("VisibleLeftMenu", this.showLeftMenu);
-    msg.on("VisibleFooter", this.showFooter);
+    // msg.on("VisibleLeftMenu", this.showLeftMenu);
+    // msg.on("VisibleFooter", this.showFooter);
   }
 
   componentWillUnmount() {
@@ -47,6 +48,7 @@ class OverView extends React.Component<reduxIProps, any> {
 
   render() {
     let { VisibleLeftMenu, VisibleFooter } = this.state;
+    console.log(this.props)
     return (
       <>
         <Layout className="overView">
