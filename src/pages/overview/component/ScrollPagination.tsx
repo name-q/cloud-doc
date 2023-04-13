@@ -9,6 +9,7 @@ import { Spin } from "antd";
 import { SketchCircleFilled } from "@ant-design/icons";
 
 import { throttle } from "lodash";
+import msg from "@/kit/msg";
 
 const antIcon = <SketchCircleFilled style={{ fontSize: 36 }} spin />;
 
@@ -25,6 +26,11 @@ const ScrollPagination: React.FC<reduxIProps> = (props) => {
   useEffect(() => {
     // 当页面加载时获取第一页的数据
     fetchData(true);
+    const handleRefresh = () => fetchData(true);
+    msg.on("Refresh Left List", handleRefresh);
+    return () => {
+      msg.off("Refresh Left List", handleRefresh);
+    };
   }, []);
 
   // 获取数据
@@ -51,7 +57,11 @@ const ScrollPagination: React.FC<reduxIProps> = (props) => {
   }, 500);
 
   return (
-    <Spin delay={100} spinning={spinning} indicator={antIcon}>
+    <Spin
+      delay={100}
+      spinning={spinning || main.loadingMessage}
+      indicator={antIcon}
+    >
       <div
         onScroll={handleScroll}
         style={{

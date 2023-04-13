@@ -6,7 +6,7 @@ import { extraPathsValue } from "@/redux/util";
 
 import dayjs from "dayjs";
 
-import { Fetch } from "@/kit/index";
+import { Fetch, msg } from "@/kit/index";
 import { message } from "antd";
 
 // eslint-disable-next-line
@@ -70,7 +70,6 @@ export default (dispatch: Dispatch) => {
 
       if (result.code) {
         let { createTime, message_history, updateTime } = result.data;
-
         createTime = action.format(createTime);
         updateTime = action.format(updateTime);
         action.commonChange("main.createTime", createTime);
@@ -115,6 +114,23 @@ export default (dispatch: Dispatch) => {
         action.commonChange("main.message_history", message_history);
       } else {
         // 开启新的对话
+        let { result } = await Fetch("/api/chatgpt/question", {
+          method: "POST",
+          body: { question } as any,
+          noCache: true,
+        });
+        let {
+          data: { createTime, messageHistory, messageId, updateTime },
+        } = result;
+        // 更新左侧列表
+        msg.emit("Refresh Left List");
+        // 载入数据
+        createTime = action.format(createTime);
+        updateTime = action.format(updateTime);
+        action.commonChange("main.createTime", createTime);
+        action.commonChange("main.updateTime", updateTime);
+        action.commonChange("main.message_history", messageHistory);
+        action.commonChange("main.selectedId", messageId);
       }
       action.commonChange("main.loadingMessage", false);
     },
