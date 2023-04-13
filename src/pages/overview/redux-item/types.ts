@@ -6,6 +6,13 @@ export interface IMainReducer {
   nick: string;
   _id: string;
   selectedId: string;
+  loadingMessage: boolean;
+  createTime: number;
+  updateTime: number;
+  message_history: Array<{
+    content: string;
+    role: "user" | "assistant" | "system";
+  }>;
 }
 
 export type ActionType = ReturnType<typeof Actions>;

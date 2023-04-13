@@ -11,6 +11,11 @@ const INITIAL_STATE: IMainReducer = {
   _id: "",
   // 选中的对话
   selectedId: "",
+  // 加载对话中
+  loadingMessage: false,
+  createTime: 0,
+  updateTime: 0,
+  message_history: [],
 };
 
 export default function main(
