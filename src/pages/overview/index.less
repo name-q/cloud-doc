@@ -99,31 +99,42 @@
       box-shadow: none !important;
       background: #fff !important;
     }
-  }
-  .chat-bubble {
-    * {
-      user-select: text;
+
+    .copy-code {
+      cursor: pointer;
+      background-color: #e7c895;
+      color: #fff;
+      border-radius: 3px;
+      padding: 5px;
+      font-size: 12px;
+      user-select: none !important;
     }
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    max-width: 70%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 19px;
-    border-bottom-left-radius: 6px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-    text-align: justify;
-    overflow: hidden;
-    p {
-      margin: 0;
+
+    .chat-bubble {
+      * {
+        user-select: text;
+      }
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      max-width: 70%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 19px;
+      border-bottom-left-radius: 6px;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+      text-align: justify;
+      overflow: hidden;
+      p {
+        margin: 0;
+      }
     }
-  }
-  .right {
-    background-color: #e7c895;
-    align-self: flex-end;
-    border-radius: 26px;
-    border-bottom-right-radius: 6px;
+    .right {
+      background-color: #e7c895;
+      align-self: flex-end;
+      border-radius: 26px;
+      border-bottom-right-radius: 6px;
+    }
   }
 }

@@ -5,8 +5,9 @@ import { store2Props } from "../redux-item/selectors";
 import actions from "../redux-item/actions";
 import { reduxIProps } from "../redux-item/types";
 
-import { Skeleton } from "antd";
+import { Skeleton, message } from "antd";
 import ReactMarkdown from "react-markdown";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"; // 代码高亮主题风格
 
@@ -60,15 +61,22 @@ const ChatContent: React.FC<reduxIProps> = ({
                       code({ node, inline, className, children, ...props }) {
                         const match = /language-(\w+)/.exec(className || "");
                         return !inline && match ? (
-                          <SyntaxHighlighter
-                            showLineNumbers={true}
-                            style={vscDarkPlus}
-                            language={match[1]}
-                            PreTag="div"
-                            {...props}
-                          >
-                            {String(children).replace(/\n$/, "")}
-                          </SyntaxHighlighter>
+                          <>
+                            <CopyToClipboard text={children}>
+                              <span className="copy-code" onClick={() => message.success("Copy Success!")}>
+                                Copy Code
+                              </span>
+                            </CopyToClipboard>
+                            <SyntaxHighlighter
+                              showLineNumbers={true}
+                              style={vscDarkPlus}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            >
+                              {String(children).replace(/\n$/, "")}
+                            </SyntaxHighlighter>
+                          </>
                         ) : (
                           <code className={className} {...props}>
                             {children}
