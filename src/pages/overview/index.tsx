@@ -3,8 +3,8 @@ import React from "react";
 import { msg } from "@/kit/index";
 
 import "./index.less";
-import { Layout, Button } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { Layout, Button, Spin } from "antd";
+import { PlusCircleOutlined, LoadingOutlined } from "@ant-design/icons";
 
 import HeaderOperate from "./component/Header-operate";
 import SearchInfoModal from "@/compon/search-info-modal";
@@ -20,6 +20,7 @@ import { registerReducer } from "@/redux/store";
 import overviewMain from "./redux-item/reducers/main";
 
 const { Header, Footer, Sider, Content } = Layout;
+const antIcon = <LoadingOutlined spin />;
 
 registerReducer({ overviewMain });
 
@@ -48,13 +49,14 @@ class OverView extends React.Component<reduxIProps, any> {
 
   render() {
     let { VisibleLeftMenu, VisibleFooter } = this.state;
-    console.log(this.props)
+    if (!this.props.main) return null;
     return (
       <>
         <Layout className="overView">
           <Header>
             <HeaderOperate />
           </Header>
+
           <Layout>
             {VisibleLeftMenu && (
               <Sider style={{ overflowY: "auto" }} className="left">
@@ -62,6 +64,7 @@ class OverView extends React.Component<reduxIProps, any> {
                   icon={<PlusCircleOutlined />}
                   block
                   size="large"
+                  disabled={this.props.main.loadingMessage}
                   onClick={() => {
                     this.props.actions.action.commonChange(
                       "main.selectedId",
@@ -74,9 +77,17 @@ class OverView extends React.Component<reduxIProps, any> {
                 <ScrollPagination />
               </Sider>
             )}
+
             <Content style={{ overflowY: "auto" }}>
-              {/* {routeWithSubRoutes(authRouters, this.handlePathMatched)} */}
-              <ChatContent />
+              <Spin
+                indicator={antIcon}
+                delay={1000}
+                spinning={this.props.main?.loadingMessage}
+                size="large"
+              >
+                {/* {routeWithSubRoutes(authRouters, this.handlePathMatched)} */}
+                <ChatContent />
+              </Spin>
             </Content>
           </Layout>
           {VisibleFooter && (

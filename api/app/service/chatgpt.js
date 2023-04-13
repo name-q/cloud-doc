@@ -171,7 +171,7 @@ class ChatGPTService extends Service {
         pageSize,
         pageNum,
         { user_id },
-        { updateTime: 1 },
+        { updateTime: -1 },
         "_id title"
       );
       return result;

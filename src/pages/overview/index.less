@@ -28,6 +28,9 @@
       display: none;
     }
     &:hover {
+      textarea {
+        height: 200px;
+      }
       height: 200px;
       z-index: 99999;
       .ant-input-suffix {
@@ -89,6 +92,12 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     padding: 10px;
+
+    pre:first-child {
+      border: none !important;
+      box-shadow: none !important;
+      background: #fff !important;
+    }
   }
   .chat-bubble {
     * {

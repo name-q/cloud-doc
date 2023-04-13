@@ -7,15 +7,16 @@ import { reduxIProps } from "../redux-item/types";
 
 import { Skeleton } from "antd";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"; // 代码高亮主题风格
 
 const ChatContent: React.FC<reduxIProps> = ({
   main: { message_history, selectedId },
 }) => {
-  console.log(message_history, "<<<message_history");
   return (
     <>
       {!selectedId ? (
-        <div className="chat-container">
+        <div className="chat-container" key="chat...">
           <div className="chat-bubble" style={{ width: "70%" }}>
             <Skeleton active />
           </div>
@@ -36,26 +37,52 @@ const ChatContent: React.FC<reduxIProps> = ({
           </div>
         </div>
       ) : (
-        <div className="chat-container">
-          {message_history.map((item) => {
+        <div className="chat-container" key="chat">
+          {message_history.map((item, index) => {
             if (item.role === "user") {
               return (
-                <>
-                  <div className="chat-bubble right">
-                    <p>{item.content}</p>
-                  </div>
-                </>
+                <div
+                  className="chat-bubble right"
+                  key={selectedId + "user" + index}
+                >
+                  <p>{item.content}</p>
+                </div>
               );
             }
             if (item.role === "assistant") {
               return (
-                <>
-                  <div className="chat-bubble">
-                    <ReactMarkdown>{item.content}</ReactMarkdown>
-                  </div>
-                </>
+                <div
+                  className="chat-bubble"
+                  key={selectedId + "assistant" + index}
+                >
+                  <ReactMarkdown
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            showLineNumbers={true}
+                            style={vscDarkPlus}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, "")}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  >
+                    {item.content}
+                  </ReactMarkdown>
+                </div>
               );
             }
+            return null;
           })}
         </div>
       )}
@@ -69,6 +96,8 @@ export default connect(
 )(
   memo(
     ChatContent,
-    (pre, next) => pre.main.message_history === next.main.message_history
+    (pre, next) =>
+      pre.main.message_history === next.main.message_history &&
+      pre.main.selectedId === next.main.selectedId
   )
 );

@@ -7,6 +7,7 @@ import { extraPathsValue } from "@/redux/util";
 import dayjs from "dayjs";
 
 import { Fetch } from "@/kit/index";
+import { message } from "antd";
 
 // eslint-disable-next-line
 export default (dispatch: Dispatch) => {
@@ -35,6 +36,26 @@ export default (dispatch: Dispatch) => {
       }
     },
 
+    format(time) {
+      // 获取当前时间
+      const now = dayjs();
+      // 获取待格式化的时间
+      const date = dayjs(time);
+      // 计算时间差
+      const diff = now.diff(date, "day");
+      // 根据时间差，格式化时间
+      let formattedDate;
+      if (diff === 0) {
+        // 今天
+        formattedDate = date.format("HH:mm");
+      } else if (diff === 1) {
+        formattedDate = date.format("昨天 HH:mm");
+      } else {
+        formattedDate = date.format("YYYY-MM-DD HH:mm:ss");
+      }
+      return formattedDate;
+    },
+
     // 选择左侧聊天
     async selectedChat(messageId) {
       action.commonChange("main.loadingMessage", true);
@@ -49,31 +70,51 @@ export default (dispatch: Dispatch) => {
 
       if (result.code) {
         let { createTime, message_history, updateTime } = result.data;
-        const format = (time) => {
-          // 获取当前时间
-          const now = dayjs();
-          // 获取待格式化的时间
-          const date = dayjs(time);
-          // 计算时间差
-          const diff = now.diff(date, "day");
-          // 根据时间差，格式化时间
-          let formattedDate;
-          if (diff === 0) {
-            // 今天
-            formattedDate = date.format("HH:mm");
-          } else if (diff === 1) {
-            formattedDate = date.format("昨天 HH:mm");
-          } else {
-            formattedDate = date.format("YYYY-MM-DD HH:mm:ss");
-          }
-          return formattedDate;
-        };
-        createTime = format(createTime);
-        updateTime = format(updateTime);
+
+        createTime = action.format(createTime);
+        updateTime = action.format(updateTime);
         action.commonChange("main.createTime", createTime);
         action.commonChange("main.updateTime", updateTime);
         action.commonChange("main.message_history", message_history);
         action.commonChange("main.selectedId", messageId);
+      } else {
+        message.error("对话失效");
+      }
+      action.commonChange("main.loadingMessage", false);
+    },
+
+    // 发送消息
+    async sendMessage(question: any) {
+      let {
+        main: { selectedId, message_history },
+      } = getData();
+      if (!question) return;
+      action.commonChange("main.loadingMessage", true);
+      if (selectedId) {
+        // 继续对话
+        let { result } = await Fetch("/api/chatgpt/linkchat", {
+          method: "POST",
+          body: { question, messageId: selectedId } as any,
+          noCache: true,
+        });
+        console.log(result);
+        let {
+          data: { newMessage, updateTime },
+        } = result;
+
+        updateTime = action.format(updateTime);
+        action.commonChange("main.updateTime", updateTime);
+        message_history = [
+          ...message_history,
+          {
+            role: "user",
+            content: question,
+          },
+          newMessage,
+        ];
+        action.commonChange("main.message_history", message_history);
+      } else {
+        // 开启新的对话
       }
       action.commonChange("main.loadingMessage", false);
     },
