@@ -72,13 +72,13 @@
       &:hover {
         background-color: #fff;
         .titleItem {
-          color: #f56614;
+          color: #e7c895;
           display: block;
         }
       }
     }
     .selected {
-      background-color: #f56614;
+      background-color: #e7c895;
       .titleItem {
         color: #fff;
       }
@@ -103,20 +103,26 @@
     * {
       user-select: text;
     }
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     max-width: 70%;
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 10px;
-    background-color: #e6e6e6;
+    border-radius: 19px;
+    border-bottom-left-radius: 6px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     text-align: justify;
     overflow: hidden;
+    p {
+      margin: 0;
+    }
   }
   .right {
+    background-color: #e7c895;
     align-self: flex-end;
-    background-color: #b3dced;
+    border-radius: 26px;
+    border-bottom-right-radius: 6px;
   }
 }

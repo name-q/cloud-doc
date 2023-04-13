@@ -14,11 +14,11 @@ ReactDOM.render(
   <ConfigProvider
     theme={{
       token: {
-        colorPrimary: "#F56614",
-        colorFillContentHover: "#F56614",
-        colorTextHeading: "#F56614",
-        colorLink: "#F56614",
-        colorLinkHover: "rgb(241,144,79)",
+        colorPrimary: "#e7c895",
+        colorFillContentHover: "#e7c895",
+        colorTextHeading: "#e7c895",
+        colorLink: "#e7c895",
+        colorLinkHover: "#e7c895",
       },
     }}
   >
