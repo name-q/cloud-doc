@@ -12,7 +12,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"; // 代码高亮主题风格
 
 const ChatContent: React.FC<reduxIProps> = ({
-  main: { message_history, selectedId },
+  main: { message_history, selectedId, createTime, updateTime },
 }) => {
   return (
     <>
@@ -39,6 +39,9 @@ const ChatContent: React.FC<reduxIProps> = ({
         </div>
       ) : (
         <div className="chat-container" key="chat">
+          {!!createTime && (
+            <p style={{ textAlign: "center", color: "#999" }}>{createTime}</p>
+          )}
           {message_history.map((item, index) => {
             if (item.role === "user") {
               return (
@@ -52,42 +55,54 @@ const ChatContent: React.FC<reduxIProps> = ({
             }
             if (item.role === "assistant") {
               return (
-                <div
-                  className="chat-bubble"
-                  key={selectedId + "assistant" + index}
-                >
-                  <ReactMarkdown
-                    components={{
-                      code({ node, inline, className, children, ...props }) {
-                        const match = /language-(\w+)/.exec(className || "");
-                        return !inline && match ? (
-                          <>
-                            <CopyToClipboard text={children}>
-                              <span className="copy-code" onClick={() => message.success("Copy Success!")}>
-                                Copy Code
-                              </span>
-                            </CopyToClipboard>
-                            <SyntaxHighlighter
-                              showLineNumbers={true}
-                              style={vscDarkPlus}
-                              language={match[1]}
-                              PreTag="div"
-                              {...props}
-                            >
-                              {String(children).replace(/\n$/, "")}
-                            </SyntaxHighlighter>
-                          </>
-                        ) : (
-                          <code className={className} {...props}>
-                            {children}
-                          </code>
-                        );
-                      },
-                    }}
+                <>
+                  {!!updateTime && index === message_history.length - 1 && (
+                    <p style={{ textAlign: "center", color: "#999" }}>
+                      {updateTime}
+                    </p>
+                  )}
+                  <div
+                    className="chat-bubble"
+                    key={selectedId + "assistant" + index}
                   >
-                    {item.content}
-                  </ReactMarkdown>
-                </div>
+                    <ReactMarkdown
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || "");
+                          return !inline && match ? (
+                            <>
+                              <CopyToClipboard text={children}>
+                                <span
+                                  className="copy-code"
+                                  onClick={() =>
+                                    message.success("Copy Success!")
+                                  }
+                                >
+                                  Copy Code
+                                </span>
+                              </CopyToClipboard>
+                              <SyntaxHighlighter
+                                showLineNumbers={true}
+                                style={vscDarkPlus}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              >
+                                {String(children).replace(/\n$/, "")}
+                              </SyntaxHighlighter>
+                            </>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          );
+                        },
+                      }}
+                    >
+                      {item.content}
+                    </ReactMarkdown>
+                  </div>
+                </>
               );
             }
             return null;

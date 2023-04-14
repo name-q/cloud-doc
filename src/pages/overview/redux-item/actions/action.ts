@@ -37,18 +37,17 @@ export default (dispatch: Dispatch) => {
     },
 
     format(time) {
-      // 获取当前时间
-      const now = dayjs();
       // 获取待格式化的时间
       const date = dayjs(time);
-      // 计算时间差
-      const diff = now.diff(date, "day");
+      const today = dayjs(Date.now()).format("YYYY-MM-DD");
+      const yesterday = dayjs().subtract(1, "day").format("YYYY-MM-DD");
+      const targetDay = date.format("YYYY-MM-DD");
       // 根据时间差，格式化时间
       let formattedDate;
-      if (diff === 0) {
+      if (targetDay === today) {
         // 今天
         formattedDate = date.format("HH:mm");
-      } else if (diff === 1) {
+      } else if (targetDay === yesterday) {
         formattedDate = date.format("昨天 HH:mm");
       } else {
         formattedDate = date.format("YYYY-MM-DD HH:mm:ss");
