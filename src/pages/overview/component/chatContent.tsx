@@ -55,7 +55,7 @@ const ChatContent: React.FC<reduxIProps> = ({
             }
             if (item.role === "assistant") {
               return (
-                <>
+                <div key={selectedId + "assistant" + index}>
                   {!!updateTime &&
                     index === message_history.length - 1 &&
                     updateTime !== createTime && (
@@ -63,15 +63,12 @@ const ChatContent: React.FC<reduxIProps> = ({
                         {updateTime}
                       </p>
                     )}
-                  <div
-                    className="chat-bubble"
-                    key={selectedId + "assistant" + index}
-                  >
+                  <div className="chat-bubble">
                     <ReactMarkdown
                       components={{
                         code({ node, inline, className, children, ...props }) {
-                          const match = /language-(\w+)/.exec(className || "");
-                          return !inline && match ? (
+                          let match = /language-(\w+)/.exec(className || "");
+                          return !inline ? (
                             <>
                               <CopyToClipboard text={children}>
                                 <span
@@ -86,7 +83,7 @@ const ChatContent: React.FC<reduxIProps> = ({
                               <SyntaxHighlighter
                                 showLineNumbers={true}
                                 style={vscDarkPlus}
-                                language={match[1]}
+                                language={match?.[1] || "javascript"}
                                 PreTag="div"
                                 {...props}
                               >
@@ -104,7 +101,7 @@ const ChatContent: React.FC<reduxIProps> = ({
                       {item.content}
                     </ReactMarkdown>
                   </div>
-                </>
+                </div>
               );
             }
             return null;
