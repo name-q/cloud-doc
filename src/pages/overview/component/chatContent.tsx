@@ -56,11 +56,13 @@ const ChatContent: React.FC<reduxIProps> = ({
             if (item.role === "assistant") {
               return (
                 <>
-                  {!!updateTime && index === message_history.length - 1 && (
-                    <p style={{ textAlign: "center", color: "#999" }}>
-                      {updateTime}
-                    </p>
-                  )}
+                  {!!updateTime &&
+                    index === message_history.length - 1 &&
+                    updateTime !== createTime && (
+                      <p style={{ textAlign: "center", color: "#999" }}>
+                        {updateTime}
+                      </p>
+                    )}
                   <div
                     className="chat-bubble"
                     key={selectedId + "assistant" + index}
