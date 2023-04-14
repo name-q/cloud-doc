@@ -5,7 +5,8 @@ import { store2Props } from "../redux-item/selectors";
 import actions from "../redux-item/actions";
 import { reduxIProps } from "../redux-item/types";
 
-import { Skeleton, message } from "antd";
+import { Skeleton, message, Dropdown, Modal, ConfigProvider } from "antd";
+import type { MenuProps } from "antd";
 import ReactMarkdown from "react-markdown";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -14,6 +15,34 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"; //
 const ChatContent: React.FC<reduxIProps> = ({
   main: { message_history, selectedId, createTime, updateTime },
 }) => {
+  const menu = (key: number): MenuProps["items"] => {
+    return [
+      {
+        label: "撤消",
+        key,
+        onClick: () => {
+          Modal.confirm({
+            title: `您确定撤消这条消息吗？`,
+            content: "撤消错误的对话会使ChatGPT判断更加准确",
+            onOk: () => {
+              if (message_history.length === 1)
+                return message.error("不可撤销所有内容!");
+              console.log(key);
+            },
+            okText: "撤消",
+            cancelText: "取消",
+            okButtonProps: {
+              style: { backgroundColor: "#e7c895", color: "#333" },
+            },
+            cancelButtonProps: {
+              style: { borderColor: "#eee", color: "#999" },
+            },
+          });
+        },
+      },
+    ];
+  };
+
   return (
     <>
       {!selectedId ? (
@@ -45,12 +74,15 @@ const ChatContent: React.FC<reduxIProps> = ({
           {message_history.map((item, index) => {
             if (item.role === "user") {
               return (
-                <div
-                  className="chat-bubble right"
+                <Dropdown
+                  menu={{ items: menu(index) }}
+                  trigger={["contextMenu"]}
                   key={selectedId + "user" + index}
                 >
-                  <p>{item.content}</p>
-                </div>
+                  <div className="chat-bubble right">
+                    <p>{item.content}</p>
+                  </div>
+                </Dropdown>
               );
             }
             if (item.role === "assistant") {
@@ -63,44 +95,55 @@ const ChatContent: React.FC<reduxIProps> = ({
                         {updateTime}
                       </p>
                     )}
-                  <div className="chat-bubble">
-                    <ReactMarkdown
-                      components={{
-                        code({ node, inline, className, children, ...props }) {
-                          let match = /language-(\w+)/.exec(className || "");
-                          return !inline ? (
-                            <>
-                              <CopyToClipboard text={children}>
-                                <span
-                                  className="copy-code"
-                                  onClick={() =>
-                                    message.success("Copy Success!")
-                                  }
+                  <Dropdown
+                    menu={{ items: menu(index) }}
+                    trigger={["contextMenu"]}
+                  >
+                    <div className="chat-bubble">
+                      <ReactMarkdown
+                        components={{
+                          code({
+                            node,
+                            inline,
+                            className,
+                            children,
+                            ...props
+                          }) {
+                            let match = /language-(\w+)/.exec(className || "");
+                            return !inline ? (
+                              <>
+                                <CopyToClipboard text={children}>
+                                  <span
+                                    className="copy-code"
+                                    onClick={() =>
+                                      message.success("Copy Success!")
+                                    }
+                                  >
+                                    Copy Code
+                                  </span>
+                                </CopyToClipboard>
+                                <SyntaxHighlighter
+                                  showLineNumbers={true}
+                                  style={vscDarkPlus}
+                                  language={match?.[1] || "javascript"}
+                                  PreTag="div"
+                                  {...props}
                                 >
-                                  Copy Code
-                                </span>
-                              </CopyToClipboard>
-                              <SyntaxHighlighter
-                                showLineNumbers={true}
-                                style={vscDarkPlus}
-                                language={match?.[1] || "javascript"}
-                                PreTag="div"
-                                {...props}
-                              >
-                                {String(children).replace(/\n$/, "")}
-                              </SyntaxHighlighter>
-                            </>
-                          ) : (
-                            <code className={className} {...props}>
-                              {children}
-                            </code>
-                          );
-                        },
-                      }}
-                    >
-                      {item.content}
-                    </ReactMarkdown>
-                  </div>
+                                  {String(children).replace(/\n$/, "")}
+                                </SyntaxHighlighter>
+                              </>
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                        }}
+                      >
+                        {item.content}
+                      </ReactMarkdown>
+                    </div>
+                  </Dropdown>
                 </div>
               );
             }
