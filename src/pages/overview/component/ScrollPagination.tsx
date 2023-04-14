@@ -6,7 +6,7 @@ import actions from "../redux-item/actions";
 import { reduxIProps } from "../redux-item/types";
 
 import { Spin } from "antd";
-import { SketchCircleFilled } from "@ant-design/icons";
+import { SketchCircleFilled, DeleteOutlined } from "@ant-design/icons";
 
 import { throttle } from "lodash";
 import msg from "@/kit/msg";
@@ -84,6 +84,11 @@ const ScrollPagination: React.FC<reduxIProps> = (props) => {
             <div key={item._id} className="titleItem">
               {item.title}...
             </div>
+            <DeleteOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            />
           </div>
         ))}
       </div>

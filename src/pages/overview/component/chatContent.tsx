@@ -87,7 +87,10 @@ const ChatContent: React.FC<reduxIProps> = ({
             }
             if (item.role === "assistant") {
               return (
-                <div key={selectedId + "assistant" + index}>
+                <div
+                  style={{ maxWidth: "max-content" }}
+                  key={selectedId + "assistant" + index}
+                >
                   {!!updateTime &&
                     index === message_history.length - 1 &&
                     updateTime !== createTime && (
